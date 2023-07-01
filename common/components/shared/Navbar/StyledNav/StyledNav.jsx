@@ -36,17 +36,17 @@ const NavLinks = [
   { name: "Store", href: "/store" },
 ];
 
-const NavLink = styled("span")(({ theme }) =>
+const NavLink = styled("div")(({ theme }) =>
   theme.unstable_sx({
     "& a": {
-      color: "text.1",
-      fontSize: "0.85rem",
       p: "0 .5em",
+      fontSize: "0.85rem",
       fontWeight: "300",
+      color: "inherit",
 
       "&:hover": {
         color: "text.2",
-        fontWeight: "600",
+        fontWeight: "500",
       },
     },
   })
@@ -57,7 +57,7 @@ const Main = styled("div")(({ theme }) =>
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "bg.1",
+    // backgroundColor: "bg.1",
     p: "0 1em",
     height: "4rem",
     userSelect: "none",
