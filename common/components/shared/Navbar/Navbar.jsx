@@ -1,5 +1,7 @@
+import StyledNav from "./StyledNav/StyledNav";
+
 const Navbar = () => {
-  return <div>Navbar</div>;
+  return <StyledNav />;
 };
 
 export default Navbar;
