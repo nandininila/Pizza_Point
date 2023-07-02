@@ -1,22 +1,43 @@
 import { frontendOrigin } from "@/types/utils/const";
-import { styled } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  styled,
+} from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import logo from "/content/logo/pizzaLogo.png";
+
+import ArticleIcon from "@mui/icons-material/Article";
+import ContactPageIcon from "@mui/icons-material/ContactPage";
+import EventIcon from "@mui/icons-material/Event";
+import HomeIcon from "@mui/icons-material/Home";
+import MenuIcon from "@mui/icons-material/Menu";
+import StoreIcon from "@mui/icons-material/Store";
+import WidgetsIcon from "@mui/icons-material/Widgets";
+import { useState } from "react";
+
+import { IoSearch } from "react-icons/io5";
 
 const Logo = styled("div")(({ theme }) =>
   theme.unstable_sx({
     display: "flex",
     alignItems: "center",
-    pr: "2em",
+    width: { xs: "80%", sm: "40%" },
   })
 );
 
 const Title = styled("div")(({ theme }) =>
   theme.unstable_sx({
     pl: ".2em",
-    fontSize: "1.2rem",
+    fontSize: "1.4rem",
 
     "span:first-of-type": {
       fontWeight: "700",
@@ -36,8 +57,23 @@ const NavLinks = [
   { name: "Store", href: "/store" },
 ];
 
+const data = [
+  { name: "Home", icon: <HomeIcon /> },
+  { name: "Products", icon: <StoreIcon /> },
+  { name: "Menu", icon: <WidgetsIcon /> },
+  { name: "Events", icon: <EventIcon /> },
+  { name: "Blog", icon: <ArticleIcon /> },
+  { name: "Contact", icon: <ContactPageIcon /> },
+];
+
 const NavLink = styled("div")(({ theme }) =>
   theme.unstable_sx({
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+
+    p: ".2em 0",
+
     "& a": {
       p: "0 .5em",
       fontSize: "0.85rem",
@@ -47,6 +83,47 @@ const NavLink = styled("div")(({ theme }) =>
       "&:hover": {
         color: "text.2",
         fontWeight: "500",
+      },
+    },
+  })
+);
+
+const NavDrawer = styled("div")(({ theme }) =>
+  theme.unstable_sx({
+    width: { xs: "70vw", sm: "50vw", tablet: "30vw" },
+  })
+);
+
+const NavDrawerLogo = styled("div")(({ theme }) =>
+  theme.unstable_sx({
+    display: "flex",
+    py: "1em",
+    justifyContent: "center",
+    userSelect: "none",
+  })
+);
+
+const MenuButton = styled("div")(({ theme }) =>
+  theme.unstable_sx({
+    "& button": {
+      bgcolor: "bg.2",
+
+      "&:hover": {
+        backgroundColor: "bg.2",
+      },
+
+      "& svg": {
+        color: "white",
+      },
+    },
+  })
+);
+
+const SearchBox = styled("div")(({ theme }) =>
+  theme.unstable_sx({
+    "& button": {
+      "& svg": {
+        strokeWidth: ".5em",
       },
     },
   })
@@ -65,6 +142,7 @@ const Main = styled("div")(({ theme }) =>
 );
 
 const StyledNav = () => {
+  const [open, setOpen] = useState(false);
   const router = useRouter();
   const route = router?.route;
   const fullPath = `${frontendOrigin}${route}`;
@@ -92,11 +170,14 @@ const StyledNav = () => {
         <NavLink
           key={i}
           sx={{
-            borderBottom: currentRoute(i, link.href) ? "2px solid #db2527" : 0,
-            transform: currentRoute(i, link.href) ? "scale(1.1)" : "initial",
+            borderBottom: currentRoute(i, link.href)
+              ? ".13em solid #db2527"
+              : 0,
+            // transform: currentRoute(i, link.href) ? "scale(1.1)" : "initial",
           }}
         >
-          <Link
+          <Typography
+            component={"a"}
             href={link?.href}
             style={{
               color: currentRoute(i, link.href) ? "#db2527" : null,
@@ -104,9 +185,52 @@ const StyledNav = () => {
             }}
           >
             {link?.name}
-          </Link>
+          </Typography>
         </NavLink>
       ))}
+
+      <Drawer open={open} anchor={"left"} onClose={() => setOpen(false)}>
+        <NavDrawer onClick={() => setOpen(false)}>
+          <NavDrawerLogo>
+            <Image src={logo} height={"32"} width={"32"} alt="Logo" />
+            <Title>
+              <span>Pizza</span>
+              <span>Point</span>
+            </Title>
+          </NavDrawerLogo>
+
+          <Divider />
+
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <List>
+              {data.map((item, index) => (
+                <ListItemButton key={index}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.name} />
+                </ListItemButton>
+              ))}
+            </List>
+          </Box>
+        </NavDrawer>
+      </Drawer>
+
+      <SearchBox>
+        <IconButton>
+          <IoSearch />
+        </IconButton>
+      </SearchBox>
+
+      <MenuButton>
+        <IconButton size="small" onClick={() => setOpen(true)}>
+          <MenuIcon />
+        </IconButton>
+      </MenuButton>
     </Main>
   );
 };
