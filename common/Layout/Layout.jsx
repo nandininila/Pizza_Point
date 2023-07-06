@@ -5,14 +5,14 @@ import Navbar from "../components/shared/Navbar/Navbar";
 
 const Layout = ({ children }) => {
   return (
-    <>
+    <div className="maxWidth">
       <ThemeProvider theme={theme}>
         <CssBaseline enableColorScheme />
         <Navbar />
         {children}
         <Footer />
       </ThemeProvider>
-    </>
+    </div>
   );
 };
 
