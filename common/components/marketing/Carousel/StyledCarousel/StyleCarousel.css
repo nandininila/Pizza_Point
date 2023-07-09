@@ -4,9 +4,6 @@
 }
 
 :root {
-  /* --swiper-pagination-bullet-height: 0.5em;
-  --swiper-pagination-bullet-width: 0.5em; */
-  --swiper-pagination-bullet-inactive-color: #db2527;
   --swiper-theme-colo: #db2527;
 }
 
@@ -26,38 +23,19 @@
   object-fit: cover;
 }
 
-/* new styles added */
-.swiper-button {
-  position: absolute;
-  bottom: clamp(0em, 1vw, 2em);
-
-  z-index: 10;
-  cursor: pointer;
-
-  font-size: clamp(1.2rem, 5vw, 3.3rem);
-}
-/* .swiper-button svg {
-  width: 2em;
-  height: 2em;
-} */
-.arrow-prev {
-  right: clamp(1.5em, 5vw, 2rem);
-}
-.arrow-next {
-  right: 0.5rem;
-}
 .swiper-button-disabled {
   opacity: 0.5;
   pointer-events: none;
-  color: gray;
+  color: gray !important;
 }
 
 /* counter */
 
 .autoplay-progress {
-  padding: 0.9em;
   font-weight: bold;
-  font-size: clamp(0.5rem, 2.1vw, 1.2rem);
+  height: 3em;
+  width: 3em;
+  font-size: var(--autoplay-progress-font-size);
 
   position: absolute;
   right: 25%;
@@ -73,7 +51,7 @@
 }
 
 .autoplay-progress svg {
-  stroke-width: 0.32rem;
+  stroke-width: var(--autoplay-progress-stroke-width);
 
   --progress: 0;
   position: absolute;
@@ -92,45 +70,16 @@
 /* pagination */
 
 .swiper-pagination {
-  position: absolute;
-  text-align: center;
+  bottom: var(--swiper-pagination-bottom);
   transition: 0.3s opacity;
   transform: translate3d(0, 0, 0);
   z-index: 10;
-  padding-bottom: 2%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   -webkit-user-select: none;
   user-select: none;
 }
 
-/* .swiper-pagination-bullet {
-  width: var(
-    --swiper-pagination-bullet-width,
-    var(--swiper-pagination-bullet-size, 8px)
-  );
-  height: var(
-    --swiper-pagination-bullet-height,
-    var(--swiper-pagination-bullet-size, 8px)
-  ); */
-
-.swiper-pagination-bullet {
-  width: clamp(0.3em, 1.5vw, 0.8em) !important;
-  height: clamp(0.3em, 1.5vw, 0.8em) !important;
-
-  margin-right: 2vw !important;
-
-  border-radius: var(--swiper-pagination-bullet-border-radius, 50%);
-  background: var(--swiper-pagination-bullet-inactive-color, #000);
-  opacity: var(--swiper-pagination-bullet-inactive-opacity, 0.2);
-}
-
 .swiper-pagination-bullet-active {
-  opacity: var(--swiper-pagination-bullet-opacity, 1);
-  background: #db2527 !important;
   outline: 1px solid #db2527;
-  outline-offset: 0.25rem;
-  box-sizing: content-box;
+  outline-offset: var(--swiper-pagination-bullet-offset);
 }

@@ -24,7 +24,7 @@ const theme = createTheme({
     },
 
     palette: {
-        mode: "dark",
+        mode: "light",
 
         text: {
             1: "#272d2e",

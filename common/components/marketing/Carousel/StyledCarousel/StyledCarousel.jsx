@@ -8,13 +8,14 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 // import required modules
-import { IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { HiArrowCircleLeft, HiArrowCircleRight } from "react-icons/hi";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Slides } from "./Slides/Slides";
 
 // data
 import { SlidesData } from "@/content/data/SlidesData";
+import { SwiperStyles } from "./SwiperStyles";
 
 const Carousel = () => {
   const progressCircle = useRef(null);
@@ -23,9 +24,11 @@ const Carousel = () => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
+
   return (
     <div className="mySwiper">
       <Swiper
+        style={SwiperStyles}
         autoplay={{
           delay: 10000,
           disableOnInteraction: true,
@@ -55,23 +58,15 @@ const Carousel = () => {
         </div>
       </Swiper>
 
-      <IconButton
-        disableRipple
-        className="swiper-button arrow-next"
-        sx={{ color: "text.2" }}
-        size="small"
-      >
-        <HiArrowCircleRight />
-      </IconButton>
+      <Box sx={SwiperStyles.navigationContainer}>
+        <IconButton disableRipple className="arrow-next" size="small">
+          <HiArrowCircleRight />
+        </IconButton>
 
-      <IconButton
-        disableRipple
-        className="swiper-button arrow-prev"
-        sx={{ color: "text.2" }}
-        size="small"
-      >
-        <HiArrowCircleLeft />
-      </IconButton>
+        <IconButton disableRipple className="arrow-prev" size="small">
+          <HiArrowCircleLeft />
+        </IconButton>
+      </Box>
     </div>
   );
 };
