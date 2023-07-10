@@ -28,7 +28,7 @@ const theme = createTheme({
 
         text: {
             1: "#272d2e",
-            2: "#db2527", 
+            2: "#db2527",
         },
 
         bg: {
@@ -36,8 +36,10 @@ const theme = createTheme({
             2: "#d50306",
         },
 
-
-
+        button: {
+            1: "#ffcf29",
+        }
+        
     },
 });
 

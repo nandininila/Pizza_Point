@@ -24,6 +24,7 @@ import StoreIcon from "@mui/icons-material/Store";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import { useState } from "react";
 
+import { createFluidValue } from "@/hooks/FluidValue/mix/FluidValue";
 import { IoSearch } from "react-icons/io5";
 
 const Logo = styled("div")(({ theme }) =>
@@ -31,13 +32,18 @@ const Logo = styled("div")(({ theme }) =>
     display: "flex",
     alignItems: "center",
     width: { xs: "80%", sm: "40%" },
+
+    "& img": {
+      height: "auto",
+      width: createFluidValue(0.7, 2),
+    },
   })
 );
 
 const Title = styled("div")(({ theme }) =>
   theme.unstable_sx({
+    fontSize: createFluidValue(0.7, 1.5),
     pl: ".2em",
-    fontSize: "1.4rem",
 
     "span:first-of-type": {
       fontWeight: "700",
@@ -76,7 +82,7 @@ const NavLink = styled("div")(({ theme }) =>
 
     "& a": {
       p: "0 .5em",
-      fontSize: "0.85rem",
+      fontSize: createFluidValue(0.65, 0.85),
       fontWeight: "300",
       color: "inherit",
 
@@ -107,6 +113,7 @@ const MenuButton = styled("div")(({ theme }) =>
   theme.unstable_sx({
     "& button": {
       bgcolor: "bg.2",
+      fontSize: createFluidValue(0.6, 1.5),
 
       "&:hover": {
         backgroundColor: "bg.2",
@@ -122,6 +129,7 @@ const MenuButton = styled("div")(({ theme }) =>
 const SearchBox = styled("div")(({ theme }) =>
   theme.unstable_sx({
     "& button": {
+      fontSize: createFluidValue(0.8, 1.4),
       "& svg": {
         strokeWidth: ".5em",
       },
@@ -135,8 +143,8 @@ const Main = styled("div")(({ theme }) =>
     justifyContent: "space-between",
     alignItems: "center",
     // backgroundColor: "bg.1",
-    p: "0 1em",
-    height: "4rem",
+    px: createFluidValue(0.4, 2),
+    height: createFluidValue(2, 5),
     userSelect: "none",
   })
 );
@@ -159,7 +167,7 @@ const StyledNav = () => {
   return (
     <Main>
       <Logo>
-        <Image src={logo} height={"32"} width={"32"} alt="Logo" />
+        <Image src={logo} alt="Logo" />
         <Title>
           <span>Pizza</span>
           <span>Point</span>
@@ -228,7 +236,7 @@ const StyledNav = () => {
 
       <MenuButton>
         <IconButton size="small" onClick={() => setOpen(true)}>
-          <MenuIcon />
+          <MenuIcon fontSize="inherit" />
         </IconButton>
       </MenuButton>
     </Main>
