@@ -35,14 +35,14 @@ const Logo = styled("div")(({ theme }) =>
 
     "& img": {
       height: "auto",
-      width: "7%",
+      width: createFluidValue(0.7, 2),
     },
   })
 );
 
 const Title = styled("div")(({ theme }) =>
   theme.unstable_sx({
-    fontSize: createFluidValue(0.8, 2),
+    fontSize: createFluidValue(0.7, 1.5),
     pl: ".2em",
 
     "span:first-of-type": {
@@ -82,7 +82,7 @@ const NavLink = styled("div")(({ theme }) =>
 
     "& a": {
       p: "0 .5em",
-      fontSize: createFluidValue(0.85, 1.15),
+      fontSize: createFluidValue(0.65, 0.85),
       fontWeight: "300",
       color: "inherit",
 
@@ -113,7 +113,7 @@ const MenuButton = styled("div")(({ theme }) =>
   theme.unstable_sx({
     "& button": {
       bgcolor: "bg.2",
-      fontSize: createFluidValue(0.6, 2),
+      fontSize: createFluidValue(0.6, 1.5),
 
       "&:hover": {
         backgroundColor: "bg.2",
@@ -129,7 +129,7 @@ const MenuButton = styled("div")(({ theme }) =>
 const SearchBox = styled("div")(({ theme }) =>
   theme.unstable_sx({
     "& button": {
-      fontSize: createFluidValue(0.9, 1.6),
+      fontSize: createFluidValue(0.8, 1.4),
       "& svg": {
         strokeWidth: ".5em",
       },
