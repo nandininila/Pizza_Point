@@ -9,7 +9,7 @@ export const SwiperStyles = {
     "--swiper-pagination-bullet-inactive-opacity": "1",
     "--swiper-pagination-bullet-offset": `${createFluidValue(0.13, .34)}`,
 
-    "--swiper-pagination-bullet-size": `${createFluidValue(0.24, .7)}`,
+    "--swiper-pagination-bullet-size": `${createFluidValue(0.3, .7)}`,
     "--swiper-pagination-bullet-horizontal-gap": `${createFluidValue(
         0.25,
         .9
@@ -17,7 +17,7 @@ export const SwiperStyles = {
     "--swiper-pagination-bottom": `${createFluidValue(.4, 1.5)}`,
 
     // 
-    "--autoplay-progress-font-size": `${createFluidValue(.42, 1.2)}`,
+    "--autoplay-progress-font-size": `${createFluidValue(.47, 1.2)}`,
     "--autoplay-progress-stroke-width": `${createFluidValue(.25, .35)}`,
 
     // button
@@ -27,7 +27,7 @@ export const SwiperStyles = {
 
         "& button": {
             color: "text.2",
-            fontSize: createFluidValue(1, 2.7),
+            fontSize: createFluidValue(1.2, 2.7),
             bottom: createFluidValue(.2, 1.5),
             zIndex: 10,
             cursor: "pointer",
@@ -40,7 +40,7 @@ export const SwiperStyles = {
 
         "button:nth-of-type(2)": {
             position: "absolute",
-            right: createFluidValue(1.2, 5),
+            right: createFluidValue(1.5, 5),
         }
     },
 }

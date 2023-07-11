@@ -1,13 +1,22 @@
+import StyledNav from "@/common/components/shared/Navbar/StyledNav/StyledNav";
 import { createFluidValue } from "@/hooks/FluidValue/mix/FluidValue";
 import { Button, Typography, styled } from "@mui/material";
 import Image from "next/image";
-import imageURL from "/content/images/Background/BackgroundPaper.png";
-
-console.log(createFluidValue(1, 1.25));
+import BackgroundImg from "/content/images/Background/BackgroundPaper.png";
 
 const Main = styled("div")(({ theme }) =>
   theme.unstable_sx({
-    height: "100%",
+    height: "auto",
+    position: "relative",
+  })
+);
+
+const TopImg = styled("div")(({ theme }) =>
+  theme.unstable_sx({
+    position: "absolute",
+    top: 0,
+    width: "7%",
+    left: "35%",
   })
 );
 
@@ -58,14 +67,13 @@ const TextsContainer = styled("div")(({ theme }) =>
   theme.unstable_sx({
     width: "45%",
     textAlign: "right",
-    pt: createFluidValue(0.3, 1),
-    pr: createFluidValue(0.4, 2),
+    pr: createFluidValue(0.4, 1),
     pl: createFluidValue(0, 1),
 
     "p:nth-of-type(1)": {
       color: "bg.2",
       fontWeight: "bold",
-      fontSize: createFluidValue(1.1, 3.8),
+      fontSize: createFluidValue(1.1, 4),
     },
 
     "p:nth-of-type(2)": {
@@ -105,16 +113,21 @@ export const Slides = ({ slide, i }) => {
   return (
     <Main>
       <Image
-        src={imageURL}
+        src={BackgroundImg}
         style={{
           zIndex: -1,
           position: "absolute",
           objectFit: "cover",
+          height: "100%",
         }}
         priority
         alt="BackgroundImage"
         quality={100}
       />
+      <TopImg>
+        <Image src={one} alt="ingredients 1" />
+      </TopImg>
+      <StyledNav />
       {/* {i === 0 && ( */}
       <Slide>
         <ImgContainer>
