@@ -15,6 +15,7 @@ import { Slides } from "./Slides/Slides";
 
 // data
 import { SlidesData } from "@/content/data/SlidesData";
+
 import { SwiperStyles } from "./SwiperStyles";
 
 const Carousel = () => {

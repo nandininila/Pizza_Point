@@ -12,7 +12,6 @@ import {
   styled,
 } from "@mui/material";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import logo from "/content/logo/pizzaLogo.png";
 
 import ArticleIcon from "@mui/icons-material/Article";
@@ -25,6 +24,7 @@ import WidgetsIcon from "@mui/icons-material/Widgets";
 import { useState } from "react";
 
 import { createFluidValue } from "@/hooks/FluidValue/mix/FluidValue";
+import { useRouter } from "next/router";
 import { IoSearch } from "react-icons/io5";
 
 const Logo = styled("div")(({ theme }) =>
@@ -35,14 +35,14 @@ const Logo = styled("div")(({ theme }) =>
 
     "& img": {
       height: "auto",
-      width: createFluidValue(0.7, 2),
+      width: createFluidValue(1.2, 2.3),
     },
   })
 );
 
 const Title = styled("div")(({ theme }) =>
   theme.unstable_sx({
-    fontSize: createFluidValue(0.7, 1.5),
+    fontSize: createFluidValue(0.9, 1.5),
     pl: ".2em",
 
     "span:first-of-type": {
@@ -113,7 +113,7 @@ const MenuButton = styled("div")(({ theme }) =>
   theme.unstable_sx({
     "& button": {
       bgcolor: "bg.2",
-      fontSize: createFluidValue(0.6, 1.5),
+      fontSize: createFluidValue(0.8, 1.5),
 
       "&:hover": {
         backgroundColor: "bg.2",
@@ -129,7 +129,7 @@ const MenuButton = styled("div")(({ theme }) =>
 const SearchBox = styled("div")(({ theme }) =>
   theme.unstable_sx({
     "& button": {
-      fontSize: createFluidValue(0.8, 1.4),
+      fontSize: createFluidValue(1, 1.4),
       "& svg": {
         strokeWidth: ".5em",
       },
@@ -143,7 +143,7 @@ const Main = styled("div")(({ theme }) =>
     justifyContent: "space-between",
     alignItems: "center",
     // backgroundColor: "bg.1",
-    px: createFluidValue(0.4, 2),
+    px: createFluidValue(0.4, 1),
     height: createFluidValue(2, 5),
     userSelect: "none",
   })
