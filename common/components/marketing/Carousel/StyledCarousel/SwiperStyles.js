@@ -1,4 +1,4 @@
-import { createFluidValue } from "@/hooks/FluidValue/mix/FluidValue";
+import { createFluidValue } from "@/common/hooks/FluidValue/mix/FluidValue";
 
 export const SwiperStyles = {
     // "--swiper-pagination-bullet-width": "8px",
