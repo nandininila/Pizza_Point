@@ -5,8 +5,7 @@ import { useContext } from "react";
 const font = "'Poppins', sans-serif";
 
 const Themes = ({ children }) => {
-  const { themeLight, setThemeType } = useContext(ThemeContext);
-  //   const [themeLight, setThemeType] = useState(true);
+  const { themeLight } = useContext(ThemeContext);
 
   const theme = createTheme({
     typography: {
