@@ -1,18 +1,21 @@
-import theme from "@/theme/theme";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import Themes from "@/Themes/Themes";
+import { CssBaseline } from "@mui/material";
 import Footer from "../components/shared/Footer/Footer";
 import Navbar from "../components/shared/Navbar/Navbar";
+import ThemeModeProvider from "../contexts/ThemeModeProvider";
 
 const Layout = ({ children }) => {
   return (
-    <div className="maxWidth">
-      <ThemeProvider theme={theme}>
+    <ThemeModeProvider>
+      <Themes>
         <CssBaseline enableColorScheme />
-        <Navbar />
-        {children}
-        <Footer />
-      </ThemeProvider>
-    </div>
+        <div className="maxWidth">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
+      </Themes>
+    </ThemeModeProvider>
   );
 };
 

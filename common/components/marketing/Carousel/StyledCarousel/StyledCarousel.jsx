@@ -14,7 +14,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Slides } from "./Slides/Slides";
 
 // data
-import { SlidesData } from "@/content/data/SlidesData";
+import { SlidesData } from "@/common/content/data/SlidesData";
 
 import { SwiperStyles } from "./SwiperStyles";
 

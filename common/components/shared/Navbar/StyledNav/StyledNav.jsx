@@ -1,4 +1,4 @@
-import { frontendOrigin } from "@/types/utils/const";
+import { frontendOrigin } from "@/common/types/utils/const";
 import {
   Box,
   Divider,
@@ -8,22 +8,26 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Tooltip,
   Typography,
   styled,
 } from "@mui/material";
 import Image from "next/image";
-import logo from "/content/logo/pizzaLogo.png";
+import logo from "/common/content/logo/pizzaLogo.png";
 
 import ArticleIcon from "@mui/icons-material/Article";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import EventIcon from "@mui/icons-material/Event";
 import HomeIcon from "@mui/icons-material/Home";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import MenuIcon from "@mui/icons-material/Menu";
 import StoreIcon from "@mui/icons-material/Store";
 import WidgetsIcon from "@mui/icons-material/Widgets";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
-import { createFluidValue } from "@/hooks/FluidValue/mix/FluidValue";
+import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
+import { createFluidValue } from "@/common/hooks/FluidValue/mix/FluidValue";
 import { useRouter } from "next/router";
 import { IoSearch } from "react-icons/io5";
 
@@ -113,6 +117,7 @@ const MenuButton = styled("div")(({ theme }) =>
   theme.unstable_sx({
     "& button": {
       bgcolor: "bg.2",
+      ml: ".2rem",
       fontSize: createFluidValue(0.8, 1.5),
 
       "&:hover": {
@@ -150,6 +155,11 @@ const Main = styled("div")(({ theme }) =>
 );
 
 const StyledNav = () => {
+  const { themeLight, setThemeType } = useContext(ThemeContext);
+  const handleThemeToggle = () => {
+    setThemeType(!themeLight);
+  };
+
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const route = router?.route;
@@ -233,6 +243,12 @@ const StyledNav = () => {
           <IoSearch />
         </IconButton>
       </SearchBox>
+
+      <Tooltip title={themeLight ? "Dark Mode" : "Light Mode"}>
+        <IconButton onClick={handleThemeToggle}>
+          {themeLight ? <DarkModeIcon /> : <LightModeIcon />}
+        </IconButton>
+      </Tooltip>
 
       <MenuButton>
         <IconButton size="small" onClick={() => setOpen(true)}>

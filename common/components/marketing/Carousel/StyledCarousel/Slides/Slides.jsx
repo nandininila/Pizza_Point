@@ -1,8 +1,8 @@
 import StyledNav from "@/common/components/shared/Navbar/StyledNav/StyledNav";
-import { createFluidValue } from "@/hooks/FluidValue/mix/FluidValue";
+import { createFluidValue } from "@/common/hooks/FluidValue/mix/FluidValue";
 import { Button, Typography, styled } from "@mui/material";
 import Image from "next/image";
-import BackgroundImg from "/content/images/Background/BackgroundPaper.png";
+import BackgroundImg from "/common/content/images/Background/BackgroundPaper.png";
 
 const Main = styled("div")(({ theme }) =>
   theme.unstable_sx({

@@ -1,4 +1,4 @@
-import Home from '@/modules/Home/Home'
+import Home from '@/common/components/modules/Home/Home'
 import Head from 'next/head'
 
 export default function IndexPage() {
