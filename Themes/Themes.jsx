@@ -39,6 +39,10 @@ const Themes = ({ children }) => {
         2: "#d50306",
       },
 
+      border: {
+        1: "#ebebeb",
+      },
+
       button: {
         1: "#ffcf29",
       },

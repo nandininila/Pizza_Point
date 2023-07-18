@@ -23,6 +23,8 @@ export const SwiperStyles = {
     // button
     "--swiper-navigation-size": `${createFluidValue(10, 10)}`,
 
+    "--price-text-shadow": `0 1px 2px #d50306, 1px 3px 1px #d50306, ${createFluidValue(0, .2)} ${createFluidValue(.1, .3)} 1px #d50306`,
+
     navigationContainer: {
 
         "& button": {

@@ -4,7 +4,7 @@ export const SlidesData = [
     "title": "Pizza",
     "subTitle": "Delicious",
     "caption": "Better Ingredients. Better Pizza",
-    "price": "$38",
+    "price": "38",
     "priceText": {
       get: "Get",
       only: "Only"
@@ -27,7 +27,7 @@ export const SlidesData = [
     "title": "Pizza",
     "subTitle": "Delicious",
     "caption": "Better Ingredients. Better Pizza",
-    "price": "$38",
+    "price": "38",
     "priceText": {
       get: "Get",
       only: "Only"
@@ -50,7 +50,7 @@ export const SlidesData = [
     "title": "Pizza",
     "subTitle": "Delicious",
     "caption": "Better Ingredients. Better Pizza",
-    "price": "$38",
+    "price": "38",
     "priceText": {
       get: "Get",
       only: "Only"
@@ -73,7 +73,7 @@ export const SlidesData = [
     "title": "Pizza",
     "subTitle": "Delicious",
     "caption": "Better Ingredients. Better Pizza",
-    "price": "$38",
+    "price": "38",
     "priceText": {
       get: "Get",
       only: "Only"

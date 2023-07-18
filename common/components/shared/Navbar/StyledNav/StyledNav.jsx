@@ -46,7 +46,7 @@ const Logo = styled("div")(({ theme }) =>
 
 const Title = styled("div")(({ theme }) =>
   theme.unstable_sx({
-    fontSize: createFluidValue(0.9, 1.5),
+    fontSize: createFluidValue(1.2, 2),
     pl: ".2em",
 
     "span:first-of-type": {
@@ -149,7 +149,7 @@ const Main = styled("div")(({ theme }) =>
     alignItems: "center",
     // backgroundColor: "bg.1",
     px: createFluidValue(0.4, 1),
-    height: createFluidValue(2, 5),
+    height: createFluidValue(3, 5),
     userSelect: "none",
   })
 );

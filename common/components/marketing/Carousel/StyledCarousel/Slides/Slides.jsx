@@ -20,6 +20,44 @@ const TopImg = styled("div")(({ theme }) =>
   })
 );
 
+const PriceSection = styled("div")(({ theme }) =>
+  theme.unstable_sx({
+    px: createFluidValue(0.3, 1.2),
+    pt: createFluidValue(0.4, 1),
+    display: "flex",
+    alignItems: "start",
+    bottom: "20%",
+    right: "0%",
+    border: `${createFluidValue(0.1, 0.15)} solid`,
+    borderRadius: createFluidValue(0.3, 1.2),
+    borderColor: "border.1",
+    backdropFilter: `blur(${createFluidValue(0.1, 0.4)})`,
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+
+    "p:nth-of-type(1)": {
+      fontFamily: "serif",
+      fontWeight: "300",
+      fontSize: createFluidValue(1.8, 6),
+      lineHeight: 1,
+
+      "span:nth-of-type(1)": {
+        fontSize: ".7em",
+      },
+    },
+
+    "p:nth-of-type(2)": {
+      pt: createFluidValue(0.2, 0.8),
+      pl: createFluidValue(0.4, 1),
+      textAlign: "right",
+      color: "bg.2",
+      fontWeight: "bold",
+      lineHeight: 0.9,
+      fontSize: createFluidValue(0.623, 1.9),
+    },
+  })
+);
+
 const Slide = styled("div")(({ theme }) =>
   theme.unstable_sx({
     display: "flex",
@@ -144,7 +182,19 @@ export const Slides = ({ slide, i }) => {
           <div>
             <Image src={five} alt="ingredients 5" />
           </div>
+
+          <PriceSection>
+            <Typography className="neonText">
+              <span>$</span>
+              {price}
+            </Typography>
+
+            <Typography>
+              {priceText.get} <br /> {priceText.only}
+            </Typography>
+          </PriceSection>
         </ImgContainer>
+
         <TextsContainer>
           <Typography>{subTitle}</Typography>
           <Typography>{title}</Typography>
