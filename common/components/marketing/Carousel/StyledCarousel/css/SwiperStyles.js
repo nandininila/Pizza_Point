@@ -16,33 +16,8 @@ export const SwiperStyles = {
     )}`,
     "--swiper-pagination-bottom": `${createFluidValue(.4, 1.5)}`,
 
-    // 
-    "--autoplay-progress-font-size": `${createFluidValue(.47, 1.2)}`,
-    "--autoplay-progress-stroke-width": `${createFluidValue(.25, .35)}`,
-
     // button
-    "--swiper-navigation-size": `${createFluidValue(10, 10)}`,
+    "--swiper-navigation-size": "10rem",
 
     "--price-text-shadow": `0 1px 2px #d50306, 1px 3px 1px #d50306, ${createFluidValue(0, .2)} ${createFluidValue(.1, .3)} 1px #d50306`,
-
-    navigationContainer: {
-
-        "& button": {
-            color: "text.2",
-            fontSize: createFluidValue(1.2, 2.7),
-            bottom: createFluidValue(.2, 1.5),
-            zIndex: 10,
-            cursor: "pointer",
-            right: createFluidValue(0, 1.8),
-        },
-
-        "button:nth-of-type(1)": {
-            position: "absolute",
-        },
-
-        "button:nth-of-type(2)": {
-            position: "absolute",
-            right: createFluidValue(1.5, 5),
-        }
-    },
-}
+};

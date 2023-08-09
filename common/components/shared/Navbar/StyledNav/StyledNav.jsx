@@ -147,10 +147,9 @@ const Main = styled("div")(({ theme }) =>
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    // backgroundColor: "bg.1",
     px: createFluidValue(0.4, 1),
     height: createFluidValue(3, 5),
-    userSelect: "none",
+    // userSelect: "none",
   })
 );
 

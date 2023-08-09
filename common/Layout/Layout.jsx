@@ -9,11 +9,9 @@ const Layout = ({ children }) => {
     <ThemeModeProvider>
       <Themes>
         <CssBaseline enableColorScheme />
-        <div className="maxWidth">
-          <Navbar />
-          {children}
-          <Footer />
-        </div>
+        <Navbar />
+        {children}
+        <Footer />
       </Themes>
     </ThemeModeProvider>
   );

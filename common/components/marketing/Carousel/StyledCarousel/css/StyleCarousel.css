@@ -7,8 +7,16 @@
   --swiper-theme-colo: #db2527;
 }
 
+.sliderContainer {
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+}
+
 .mySwiper {
   position: relative;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .swiper {
@@ -31,7 +39,8 @@
   font-size: var(--autoplay-progress-font-size);
 
   position: absolute;
-  right: 25%;
+  right: var(--autoplay-progress-right);
+  left: var(--autoplay-progress-left);
   bottom: 2%;
   z-index: 10;
   display: flex;

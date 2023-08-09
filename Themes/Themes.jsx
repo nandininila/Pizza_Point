@@ -29,6 +29,19 @@ const Themes = ({ children }) => {
     palette: {
       mode: themeLight ? "light" : "dark",
 
+      primary: {
+        light: "#757ce8",
+        main: "#3f50b5",
+        dark: "#002884",
+        contrastText: "#fff",
+      },
+      secondary: {
+        light: "#ff7961",
+        main: "#f44336",
+        dark: "#ba000d",
+        contrastText: "#000",
+      },
+
       text: {
         1: "#272d2e",
         2: "#db2527",
