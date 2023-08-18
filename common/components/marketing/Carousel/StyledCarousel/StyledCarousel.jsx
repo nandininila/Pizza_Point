@@ -32,25 +32,29 @@ const Carousel = () => {
   };
 
   // buttons
-  let left;
-  let right = createFluidValue(0, 1.8);
-  let rightTwo = createFluidValue(1.5, 5);
+  // let left;
+  // let right =
+  // let rightTwo =
+
+  let display;
 
   if (activeIndex === 1) {
-    left = "-75%";
-    right = 0;
-    rightTwo = createFluidValue(2.7, 7);
+    // left = "-75%";
+    // right = 0;
+    // rightTwo = createFluidValue(2.7, 7);
+
+    display = "none";
   }
 
   const navigationContainer = {
     "& button": {
+      display: display,
       color: "text.2",
       fontSize: createFluidValue(1.2, 2.7),
       bottom: createFluidValue(0.2, 1.5),
       zIndex: 10,
       cursor: "pointer",
-      right: right,
-      left: left,
+      right: createFluidValue(0, 1.8),
     },
 
     "button:nth-of-type(1)": {
@@ -59,7 +63,7 @@ const Carousel = () => {
 
     "button:nth-of-type(2)": {
       position: "absolute",
-      right: rightTwo,
+      right: createFluidValue(1.5, 5),
     },
   };
 

@@ -39,6 +39,7 @@ const PriceSection = styled("div")(({ theme }) =>
       fontFamily: "serif",
       fontWeight: "300",
       fontSize: createFluidValue(1.8, 6),
+      color: "white",
       lineHeight: 1,
 
       "span:nth-of-type(1)": {
@@ -73,7 +74,7 @@ const ImgContainer = styled("div")(({ theme }) =>
     position: "relative",
 
     "img:nth-of-type(1)": {
-      width: "90%",
+      width: "90.5%",
     },
 
     "& div": {

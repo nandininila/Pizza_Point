@@ -5,6 +5,7 @@
 
 :root {
   --swiper-theme-colo: #db2527;
+  --customFont: myCustomFont;
 }
 
 .sliderContainer {
@@ -89,7 +90,6 @@
 
 .neonText {
   animation: flicker 1.5s infinite alternate;
-  color: #fff;
 }
 
 /* Flickering animation */
@@ -109,4 +109,10 @@
   55% {
     text-shadow: none;
   }
+}
+
+@font-face {
+  font-family: myCustomFont;
+  src: url("../../../../../types/utils/Fonts/CottonCandies.ttf")
+    format("truetype");
 }

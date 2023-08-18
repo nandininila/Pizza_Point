@@ -24,13 +24,13 @@ const Slide = styled("div")(({ theme }) =>
     display: "flex",
     justifyContent: "space-between",
     height: "100%",
-    pt: createFluidValue(1, 2.5),
+    pt: createFluidValue(1.05, 2.5),
   })
 );
 
 const ImgContainer = styled("div")(({ theme }) =>
   theme.unstable_sx({
-    width: "50%",
+    width: "49%",
     position: "relative",
 
     "& div": {
@@ -57,7 +57,7 @@ const ImgContainer = styled("div")(({ theme }) =>
 
 const TextsContainer = styled("div")(({ theme }) =>
   theme.unstable_sx({
-    width: "50%",
+    width: "45%",
     pl: createFluidValue(0.4, 1),
 
     "p:nth-of-type(1)": {
@@ -115,15 +115,15 @@ const PriceSection = styled("div")(({ theme }) =>
     },
 
     "p:nth-of-type(2)": {
-      fontFamily: "serif",
+      fontFamily: "var(--customFont)",
       color: "white",
-      fontSize: createFluidValue(1.2, 5),
-      lineHeight: 0.1,
+      fontSize: createFluidValue(1.5, 5.8),
+      lineHeight: 0.25,
     },
   })
 );
 
-const SlideTwo = ({ slide, i }) => {
+const SlideTwo = ({ slide }) => {
   const { title, subTitle, caption, discount } = slide;
   const pizzaImg = slide?.img?.pizza;
   const { one, two, three, four } = slide?.img?.ingredients;
