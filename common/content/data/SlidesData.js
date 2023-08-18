@@ -4,19 +4,15 @@ export const SlidesData = [
     "title": "Pizza",
     "subTitle": "Delicious",
     "caption": "Better Ingredients. Better Pizza",
-    "price": "$38",
-    "priceText": {
-      get: "Get",
-      only: "Only"
-    },
+    "price": "38",
     "img": {
-      pizza: require("@/common/content/images/SlideOne/place_your_image_here_dou_2.png"),
+      pizza: require("@/common/content/images/SlideOne/slide_one_pizza.webp"),
       "ingredients": {
-        one: require("@/common/content/images/SlideOne/ingredients_1.png"),
-        two: require("@/common/content/images/SlideOne/ingredients_2.png"),
-        three: require("@/common/content/images/SlideOne/ingredients_3.png"),
-        four: require("@/common/content/images/SlideOne/ingredients_4.png"),
-        five: require("@/common/content/images/SlideOne/ingredients_5.png"),
+        one: require("@/common/content/images/SlideOne/ingredients_1.webp"),
+        two: require("@/common/content/images/SlideOne/ingredients_2.webp"),
+        three: require("@/common/content/images/SlideOne/ingredients_3.webp"),
+        four: require("@/common/content/images/SlideOne/ingredients_4.webp"),
+        five: require("@/common/content/images/SlideOne/ingredients_5.webp"),
       },
     },
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis no."
@@ -25,70 +21,38 @@ export const SlidesData = [
   {
 
     "title": "Pizza",
-    "subTitle": "Delicious",
-    "caption": "Better Ingredients. Better Pizza",
-    "price": "$38",
-    "priceText": {
-      get: "Get",
-      only: "Only"
-    },
+    "subTitle": "Italian",
+    "caption": "All the taste, not on your waist",
+    "discount": "45%",
     "img": {
-      pizza: require("@/common/content/images/SlideOne/place_your_image_here_dou_2.png"),
+      pizza: require("@/common/content/images/SlideTwo/slide_two_pizza.webp"),
       "ingredients": {
-        one: require("@/common/content/images/SlideOne/ingredients_1.png"),
-        two: require("@/common/content/images/SlideOne/ingredients_2.png"),
-        three: require("@/common/content/images/SlideOne/ingredients_3.png"),
-        four: require("@/common/content/images/SlideOne/ingredients_4.png"),
-        five: require("@/common/content/images/SlideOne/ingredients_5.png"),
+        one: require("@/common/content/images/SlideTwo/ingredients_1.webp"),
+        two: require("@/common/content/images/SlideTwo/ingredients_2.webp"),
+        three: require("@/common/content/images/SlideTwo/ingredients_3.webp"),
+        four: require("@/common/content/images/SlideTwo/ingredients_4.webp"),
       },
     },
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis no."
-
   },
   {
 
     "title": "Pizza",
-    "subTitle": "Delicious",
-    "caption": "Better Ingredients. Better Pizza",
-    "price": "$38",
-    "priceText": {
-      get: "Get",
-      only: "Only"
-    },
+    "subTitle": "Hot",
+    "caption": "Delicious Italian pizza at your home",
+    "price": "38",
     "img": {
-      pizza: require("@/common/content/images/SlideOne/place_your_image_here_dou_2.png"),
+      pizza: require("@/common/content/images/SlideThree/slide_three_pizza.webp"),
       "ingredients": {
-        one: require("@/common/content/images/SlideOne/ingredients_1.png"),
-        two: require("@/common/content/images/SlideOne/ingredients_2.png"),
-        three: require("@/common/content/images/SlideOne/ingredients_3.png"),
-        four: require("@/common/content/images/SlideOne/ingredients_4.png"),
-        five: require("@/common/content/images/SlideOne/ingredients_5.png"),
+        one: require("@/common/content/images/SlideThree/ingredients_1.webp"),
+        two: require("@/common/content/images/SlideThree/ingredients_2.webp"),
+        three: require("@/common/content/images/SlideThree/ingredients_3.webp"),
+        four: require("@/common/content/images/SlideThree/ingredients_4.webp"),
+        five: require("@/common/content/images/SlideThree/ingredients_5.webp"),
+        six: require("@/common/content/images/SlideThree/ingredients_6.webp"),
+        seven: require("@/common/content/images/SlideThree/ingredients_7.webp"),
       },
     },
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis no."
-
-  },
-  {
-
-    "title": "Pizza",
-    "subTitle": "Delicious",
-    "caption": "Better Ingredients. Better Pizza",
-    "price": "$38",
-    "priceText": {
-      get: "Get",
-      only: "Only"
-    },
-    "img": {
-      pizza: require("@/common/content/images/SlideOne/place_your_image_here_dou_2.png"),
-      "ingredients": {
-        one: require("@/common/content/images/SlideOne/ingredients_1.png"),
-        two: require("@/common/content/images/SlideOne/ingredients_2.png"),
-        three: require("@/common/content/images/SlideOne/ingredients_3.png"),
-        four: require("@/common/content/images/SlideOne/ingredients_4.png"),
-        five: require("@/common/content/images/SlideOne/ingredients_5.png"),
-      },
-    },
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis no."
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis no." 
 
   },
 ]
