@@ -1,4 +1,5 @@
 import Carousel from "@/common/components/marketing/Carousel/StyledCarousel/StyledCarousel";
+import OurMenu from "../../application/Menu/OurMenu/OurMenu";
 import styles from "./Home.module.css";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
   return (
     <main className={styles}>
       <Carousel />
+      <OurMenu />
     </main>
   );
 };
