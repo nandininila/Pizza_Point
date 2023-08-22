@@ -1,7 +1,6 @@
 import { createFluidValue } from "@/common/hooks/FluidValue/mix/FluidValue";
 import {
   Button,
-  Paper,
   Typography,
   styled,
   useMediaQuery,
@@ -10,10 +9,15 @@ import {
 import Image from "next/image";
 import L_Img from "../../../../../content/images/Features/feature_1.webp";
 import R_Img from "../../../../../content/images/Features/feature_2.webp";
+import BackgroundImg from "/common/content/images/Background/BackgroundPaper.webp";
 
-const Main = styled("div")(({ theme }) => theme.unstable_sx({ width: "100%" }));
+const Main = styled("div")(({ theme }) =>
+  theme.unstable_sx({
+    position: "relative",
+  })
+);
 
-const Container = styled(Paper)(({ theme }) =>
+const Container = styled("div")(({ theme }) =>
   theme.unstable_sx({
     maxWidth: "lg",
     margin: "0 auto",
@@ -21,6 +25,8 @@ const Container = styled(Paper)(({ theme }) =>
 
     display: "flex",
     // alignSelf: "center",
+    // backdropFilter: `blur(${createFluidValue(0.2, 1)})`,
+    // backgroundColor: "rgba(255, 255, 255, 0)",
   })
 );
 
@@ -126,6 +132,19 @@ const StyledOurMenu = () => {
   ];
   return (
     <Main>
+      <Image
+        src={BackgroundImg}
+        style={{
+          display: "none",
+          zIndex: -1,
+          position: "absolute",
+          objectFit: "cover",
+          height: "100%",
+        }}
+        priority
+        alt="BackgroundImage"
+        quality={100}
+      />
       <Container>
         <LeftImg>
           <Image src={L_Img} alt="LImg" />
