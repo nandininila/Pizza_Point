@@ -46,7 +46,8 @@ const DiscoverOurMenu = styled("div")(({ theme }) =>
   theme.unstable_sx({
     alignSelf: "flex-end",
     flex: 2,
-    pt: { xs: "7%", md: 0 },
+    // pt: { xs: "7%", md: 0 },
+    pt: "7%",
   })
 );
 

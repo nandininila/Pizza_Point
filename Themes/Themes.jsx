@@ -20,6 +20,9 @@ const Themes = ({ children }) => {
         lg: 1200,
         xl: 1536,
 
+        mobileS: 320,
+        mobileM: 375,
+        mobileL: 425,
         mobile: 640,
         tablet: 768,
         laptop: 1024,
