@@ -1,3 +1,4 @@
+import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
 import { createFluidValue } from "@/common/hooks/FluidValue/mix/FluidValue";
 import {
   Button,
@@ -7,6 +8,8 @@ import {
   useTheme,
 } from "@mui/material";
 import Image from "next/image";
+
+import { useContext } from "react";
 import L_Img from "../../../../../content/images/Features/feature_1.webp";
 import R_Img from "../../../../../content/images/Features/feature_2.webp";
 import BackgroundImg from "/common/content/images/Background/BackgroundPaper.webp";
@@ -90,6 +93,12 @@ const StyledOurMenu = () => {
   const theme = useTheme();
   let mode = theme.palette.mode;
 
+  const { allData, selectedCategory, setSelectedCategory } =
+    useContext(ThemeContext);
+
+  const categories = allData.map((x) => x.category);
+  const uniqueCategories = [...new Set(categories)];
+
   let responsive;
   if (useMediaQuery(theme.breakpoints.down("sm"))) {
     responsive = "small";
@@ -99,38 +108,6 @@ const StyledOurMenu = () => {
     responsive = "large";
   }
 
-  const data = [
-    {
-      title: "Pizza",
-    },
-    {
-      title: "Calzones",
-    },
-    {
-      title: "Wraps",
-    },
-    {
-      title: "Salads",
-    },
-    {
-      title: "Sides",
-    },
-    {
-      title: "Pasta Dinner",
-    },
-    {
-      title: "Dinners",
-    },
-    {
-      title: "Grill & Seafood",
-    },
-    {
-      title: "Ice Cream",
-    },
-    {
-      title: "Kids",
-    },
-  ];
   return (
     <Main>
       <Image
@@ -158,26 +135,28 @@ const StyledOurMenu = () => {
           </Texts>
 
           <MenuButtons>
-            {data.map((d, i) => (
+            {uniqueCategories.map((c, i) => (
               <MenuButton
                 variant="outlined"
                 size={responsive}
                 color="warning"
                 key={i}
+                onClick={() => setSelectedCategory(c)}
                 sx={{
-                  color: "warning.light",
-                  "&:focus": {
-                    bgcolor:
-                      mode === "light" ? "warning.light" : "warning.dark",
-                    color: "white",
-                  },
+                  color: selectedCategory === c ? "white" : "warning.light",
+                  bgcolor: selectedCategory === c && "warning.light",
 
                   ":hover": {
+                    bgcolor: selectedCategory === c && "warning.light",
                     boxShadow: "0 0 0 0.1rem #ff9800",
+                  },
+
+                  ":focus": {
+                    boxShadow: "none",
                   },
                 }}
               >
-                {d.title}
+                {c}
               </MenuButton>
             ))}
           </MenuButtons>

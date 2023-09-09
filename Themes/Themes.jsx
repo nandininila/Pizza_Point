@@ -77,6 +77,10 @@ const Themes = ({ children }) => {
       bg: {
         1: "#eaeaea",
         2: "#d50306",
+        3: "#da9942",
+        4: "#efcc97",
+        5: "#ffdf99",
+        6: "#fcfbff",
       },
 
       border: {

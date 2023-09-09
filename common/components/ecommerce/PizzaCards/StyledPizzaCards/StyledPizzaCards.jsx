@@ -1,13 +1,13 @@
+import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import {
-  Box,
   Card,
   CardActionArea,
   CardActions,
   CardContent,
   CardMedia,
-  Chip,
   Grid,
-  Stack,
+  IconButton,
   Typography,
   styled,
   useMediaQuery,
@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import arrayShuffle from "array-shuffle";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const Main = styled("div")(({ theme }) => theme.unstable_sx({}));
 
@@ -24,23 +24,40 @@ const Container = styled("div")(({ theme }) =>
     maxWidth: "lg",
     margin: "0 auto",
     // px: createFluidValue(0.4, 1),
-    px: { xs: 1, sm: 3, md: 5 },
-    pt: "7%",
+    px: { xs: 2, sm: 3, md: 5 },
+    pt: "5%",
   })
 );
 
 const StyledPizzaCards = () => {
+  const [addToCart, setAddToCart] = useState(false);
+  const [selectedID, setSelectedID] = useState();
+
   const theme = useTheme();
-  const [pizzas, setPizzas] = useState([]);
+  const {
+    allData,
+    setAllData,
+    allShuffledData,
+    setAllShuffledData,
+    selectedCategory,
+    // setSelectedCategory,
+  } = useContext(ThemeContext);
 
   const loadData = async () => {
     try {
-      const url = "api/pizza";
+      const url = "api/items";
       const res = await axios.get(url);
       const data = res.data;
 
-      const shuffledPizzas = arrayShuffle(data);
-      setPizzas(shuffledPizzas);
+      // condition to load data
+      const categoryWiseData = data.filter((d) => {
+        return d.category === selectedCategory;
+      });
+      // condition to load data
+
+      setAllData(data);
+      const shuffled = arrayShuffle(categoryWiseData);
+      setAllShuffledData(shuffled);
     } catch (error) {
       console.log(error);
     }
@@ -48,19 +65,7 @@ const StyledPizzaCards = () => {
 
   useEffect(() => {
     loadData();
-  }, []);
-
-  const [selectedPrice, setSelectedPrice] = useState();
-  const [selectedId, setSelectedId] = useState();
-  const [selectedIndex, setSelectedIndex] = useState();
-
-  const handleGet = (id, i, plan) => {
-    setSelectedId(id);
-    setSelectedIndex(i);
-
-    const price = plan[0].price;
-    setSelectedPrice(price);
-  };
+  }, [selectedCategory]);
 
   let sliceEndNumber = 4;
   if (useMediaQuery(theme.breakpoints.between("sm", "md"))) {
@@ -72,139 +77,116 @@ const StyledPizzaCards = () => {
   return (
     <Main>
       <Container>
-        <Grid
-          container
-          rowSpacing={2}
-          columnSpacing={{ xs: 1.5, sm: 1.5, md: 2 }}
-        >
-          {pizzas
+        <Grid container rowSpacing={2} columnSpacing={{ xs: 1.5, md: 3 }}>
+          {allShuffledData
             .slice(0, sliceEndNumber)
-            .map(({ id, name, description, img, price, sizeandcrust }, i) => (
-              <Grid item key={i} xs={6} sm={4} md={3}>
-                <Card>
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="194"
-                      image={img}
-                      title={name}
-                    />
-                    <CardContent
-                      sx={{ height: { xs: 100, sm: 120 }, overflow: "scroll" }}
+            .map(
+              (
+                { id, name, image, description, price, category, extras },
+                i
+              ) => (
+                <Grid item key={i} xs={6} sm={4} md={3}>
+                  <Card>
+                    <CardActionArea>
+                      <CardMedia
+                        sx={{
+                          px:
+                            category === "pizza" ||
+                            (category === "ice cream" && 1),
+                          height: { xs: 120, mobileM: 200 },
+                          objectFit:
+                            category === "pizza" || category === "ice cream"
+                              ? "contain"
+                              : "cover",
+                        }}
+                        title={name}
+                        component="img"
+                        image={image}
+                        alt={name}
+                      />
+                      <CardContent sx={{ pb: 1 }}>
+                        <Typography
+                          noWrap
+                          sx={{
+                            fontSize: {
+                              xs: " 0.875rem",
+                              mobileL: "1rem",
+                              sm: "1.1rem",
+                              md: "1.4rem",
+                            },
+                            fontWeight: "medium",
+                          }}
+                        >
+                          {name} {category === "pizza" && "Pizza"}
+                        </Typography>
+
+                        <Typography
+                          color="text.secondary"
+                          noWrap
+                          sx={{
+                            typography: { xs: "caption", sm: "body2" },
+                          }}
+                        >
+                          {category === "pizza" && "with"} {description}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+
+                    <CardActions
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        pl: 2,
+                      }}
                     >
                       <Typography
-                        gutterBottom
-                        color="warning.light"
-                        align="center"
-                        component="div"
-                        fontWeight={{ xs: "bold", sm: "medium" }}
+                        component={"span"}
                         sx={{
-                          typography: {
-                            xs: "caption",
-                            sm: "subtitle2",
-                            tablet: "subtitle1",
+                          fontSize: {
+                            xs: "1rem",
+                            mobileL: "1.1rem",
+                            sm: "1.3rem",
+                            md: "1.5rem",
                           },
+                          fontWeight: "bold",
                         }}
                       >
-                        {name}
+                        <Typography
+                          component={"span"}
+                          color={"warning.light"}
+                          sx={{
+                            fontSize: {
+                              xs: "0.75rem",
+                              mobileL: "0.875rem",
+                              sm: "1.1rem",
+                            },
+                            fontWeight: "bold",
+                          }}
+                        >
+                          $
+                        </Typography>
+                        {price}
                       </Typography>
-                      <Typography
-                        align="center"
-                        color="text.secondary"
-                        component="div"
+
+                      <IconButton
+                        aria-label="add to favorites"
                         sx={{
-                          typography: { xs: "caption", tablet: "body2" },
+                          lineHeight: 0,
+                          color: selectedID === id && "red",
+                        }}
+                        onClick={() => {
+                          setAddToCart(!addToCart);
+                          setSelectedID(id);
                         }}
                       >
-                        {description}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions
-                    sx={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <Stack direction="row" spacing={0.5}>
-                      {sizeandcrust?.map((plan, i) =>
-                        Object.values(plan, i).map((plan, i) => (
-                          //
-                          <Chip
-                            key={i}
-                            label={i === 0 ? "30cm" : i === 1 ? "40cm" : "50cm"}
-                            // label={plan[0].price}
-                            size="small"
-                            onClick={() => {
-                              handleGet(id, i, plan);
-                            }}
-                            sx={{
-                              fontSize: {
-                                mobileS: "9px",
-                                mobileM: "10.5px",
-                              },
-
-                              bgcolor:
-                                i === selectedIndex && id === selectedId
-                                  ? "text.1"
-                                  : i === 0 &&
-                                    id !== selectedId &&
-                                    "warning.light",
-
-                              color:
-                                i === selectedIndex && id === selectedId
-                                  ? "white"
-                                  : i === 0 && id !== selectedId && "white",
-
-                              outline:
-                                i === selectedIndex &&
-                                id === selectedId &&
-                                "1px solid",
-
-                              ":focus": {
-                                bgcolor: "text.1",
-                                color: "white",
-                              },
-
-                              ":hover": {
-                                bgcolor:
-                                  i === selectedIndex && id === selectedId
-                                    ? "text.1"
-                                    : i === 0 &&
-                                      id !== selectedId &&
-                                      "warning.dark",
-                                outline: "1px solid",
-                                outlineColor: "warning.dark",
-                              },
-                            }}
-                          />
-                        ))
-                      )}
-                    </Stack>
-                  </CardActions>
-                  <Box
-                    component={CardActions}
-                    display={"flex"}
-                    justifyContent={"space-around"}
-                  >
-                    <Typography
-                      paragraph
-                      sx={{
-                        color: "warning.light",
-                        fontWeight: { xs: "regular", sm: "medium" },
-                      }}
-                    >
-                      ${selectedId === id ? selectedPrice : price}
-                    </Typography>
-                    <Typography
-                      paragraph
-                      sx={{
-                        fontWeight: { xs: "regular", sm: "medium" },
-                      }}
-                    >
-                      1
-                    </Typography>
-                  </Box>
-                </Card>
-              </Grid>
-            ))}
+                        {selectedID === id ? <Favorite /> : <FavoriteBorder />}
+                      </IconButton>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              )
+            )}
         </Grid>
       </Container>
     </Main>
