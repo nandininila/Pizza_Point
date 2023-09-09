@@ -18,7 +18,7 @@ import { useRef, useState } from "react";
 import { Slides } from "./Slides/Slides";
 import { SwiperStyles } from "./css/SwiperStyles";
 import AutoplayProgress from "./features/AutoplayProgress";
-import BackgroundImg from "/common/content/images/Background/BackgroundPaper.png";
+import BackgroundImg from "/common/content/images/Background/BackgroundPaper.webp";
 
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);

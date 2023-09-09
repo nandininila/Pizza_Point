@@ -159,7 +159,7 @@ export const SlideOne = ({ slide }) => {
         <StyledNav />
         <Slide>
           <ImgContainer>
-            <Image src={pizzaImg} alt="pizza img" />
+            <Image src={pizzaImg} alt="pizza img" priority={true} />
             <div>
               <Image src={two} alt="ingredients 2" />
             </div>
