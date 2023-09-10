@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const ProductSchema = new mongoose.Schema(
     {
+        id: Number,
         name: {
             type: String,
             required: true,
@@ -12,7 +13,7 @@ const ProductSchema = new mongoose.Schema(
             required: true,
             maxLength: 200,
         },
-        img: {
+        image: {
             type: String,
             required: true,
         },
@@ -28,25 +29,15 @@ const ProductSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-        weight: {
-            type: String,
-        },
-        sizes: {
-            type: [
-                {
-                    text: { type: String, required: true },
-                    price: { type: Number, required: true },
-                },
-            ],
-        },
-        extras: {
-            type: [
-                {
-                    text: { type: String, required: true },
-                    price: { type: Number, required: true },
-                },
-            ],
-        },
+        weight: String,
+        sizes: [{
+            name: String,
+            price: Number
+        }],
+        extras: [{
+            name: String,
+            price: Number
+        }]
     },
     { timestamps: true }
 );

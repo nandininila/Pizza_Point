@@ -1,7 +1,8 @@
-import Home from '@/common/components/modules/Home/Home'
-import Head from 'next/head'
+import Home from '@/common/components/modules/Home/Home';
+import axios from 'axios';
+import Head from 'next/head';
 
-export default function IndexPage() {
+export default function IndexPage({ allServerData }) {
   return (
     <>
       <Head>
@@ -10,7 +11,18 @@ export default function IndexPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Home />
+      <Home allServerData={allServerData}/>
     </>
   )
 }
+
+export const getServerSideProps = async () => {
+  const url = "http://localhost:3000/api/products";
+  const res = await axios.get(url);
+  const data = res.data;
+  return {
+    props: {
+      allServerData : data,
+    },
+  };
+};

@@ -14,7 +14,7 @@ import {
   useTheme,
 } from "@mui/material";
 import arrayShuffle from "array-shuffle";
-import axios from "axios";
+import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 
 const Main = styled("div")(({ theme }) => theme.unstable_sx({}));
@@ -29,13 +29,13 @@ const Container = styled("div")(({ theme }) =>
   })
 );
 
-const StyledPizzaCards = () => {
+const StyledPizzaCards = ({ allServerData }) => {
   const [addToCart, setAddToCart] = useState(false);
   const [selectedID, setSelectedID] = useState();
 
   const theme = useTheme();
   const {
-    allData,
+    // allData,
     setAllData,
     allShuffledData,
     setAllShuffledData,
@@ -45,17 +45,17 @@ const StyledPizzaCards = () => {
 
   const loadData = async () => {
     try {
-      const url = "api/items";
-      const res = await axios.get(url);
-      const data = res.data;
+      // const url = "api/products";
+      // const res = await axios.get(url);
+      // const data = res.data;
 
       // condition to load data
-      const categoryWiseData = data.filter((d) => {
+      const categoryWiseData = allServerData.filter((d) => {
         return d.category === selectedCategory;
       });
       // condition to load data
 
-      setAllData(data);
+      setAllData(allServerData);
       const shuffled = arrayShuffle(categoryWiseData);
       setAllShuffledData(shuffled);
     } catch (error) {
@@ -82,55 +82,57 @@ const StyledPizzaCards = () => {
             .slice(0, sliceEndNumber)
             .map(
               (
-                { id, name, image, description, price, category, extras },
+                { _id, id, name, image, description, price, category, extras },
                 i
               ) => (
                 <Grid item key={i} xs={6} sm={4} md={3}>
                   <Card>
-                    <CardActionArea>
-                      <CardMedia
-                        sx={{
-                          px:
-                            category === "pizza" ||
-                            (category === "ice cream" && 1),
-                          height: { xs: 120, mobileM: 200 },
-                          objectFit:
-                            category === "pizza" || category === "ice cream"
-                              ? "contain"
-                              : "cover",
-                        }}
-                        title={name}
-                        component="img"
-                        image={image}
-                        alt={name}
-                      />
-                      <CardContent sx={{ pb: 1 }}>
-                        <Typography
-                          noWrap
+                    <Link href={`product/${_id}`} passHref>
+                      <CardActionArea>
+                        <CardMedia
                           sx={{
-                            fontSize: {
-                              xs: " 0.875rem",
-                              mobileL: "1rem",
-                              sm: "1.1rem",
-                              md: "1.4rem",
-                            },
-                            fontWeight: "medium",
+                            px:
+                              category === "pizza" ||
+                              (category === "ice cream" && 1),
+                            height: { xs: 120, mobileM: 200 },
+                            objectFit:
+                              category === "pizza" || category === "ice cream"
+                                ? "contain"
+                                : "cover",
                           }}
-                        >
-                          {name} {category === "pizza" && "Pizza"}
-                        </Typography>
+                          title={name}
+                          component="img"
+                          image={image}
+                          alt={name}
+                        />
+                        <CardContent sx={{ pb: 1 }}>
+                          <Typography
+                            noWrap
+                            sx={{
+                              fontSize: {
+                                xs: " 0.875rem",
+                                mobileL: "1rem",
+                                sm: "1.1rem",
+                                md: "1.4rem",
+                              },
+                              fontWeight: "medium",
+                            }}
+                          >
+                            {name} {category === "pizza" && "Pizza"}
+                          </Typography>
 
-                        <Typography
-                          color="text.secondary"
-                          noWrap
-                          sx={{
-                            typography: { xs: "caption", sm: "body2" },
-                          }}
-                        >
-                          {category === "pizza" && "with"} {description}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
+                          <Typography
+                            color="text.secondary"
+                            noWrap
+                            sx={{
+                              typography: { xs: "caption", sm: "body2" },
+                            }}
+                          >
+                            {category === "pizza" && "with"} {description}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Link>
 
                     <CardActions
                       sx={{
