@@ -3,7 +3,7 @@ import OurMenu from "../../application/Menu/OurMenu/OurMenu";
 import PizzaCards from "../../ecommerce/PizzaCards/PizzaCards";
 import styles from "./Home.module.css";
 
-const Home = () => {
+const Home = ({ allServerData }) => {
   // const theme = useTheme();
   // let mode = theme.palette.mode;
 
@@ -11,7 +11,7 @@ const Home = () => {
     <main className={styles}>
       <Carousel />
       <OurMenu />
-      <PizzaCards />
+      <PizzaCards allServerData={allServerData} />
     </main>
   );
 };
