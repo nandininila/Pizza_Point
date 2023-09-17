@@ -20,6 +20,13 @@ export const getServerSideProps = async () => {
   const url = "http://localhost:3000/api/products";
   const res = await axios.get(url);
   const data = res.data;
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       allServerData : data,
