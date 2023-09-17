@@ -4,6 +4,7 @@
 import Product from "@/common/models/Product";
 import dbConnect from "@/common/types/utils/mongoose";
 
+
 // const getData = () => {
 //     const filePath = path.join(process.cwd(), "common", "content", "data", "PizzaData", "AllPizzaData.json");
 //     const fileData = fs.readFileSync(filePath);
@@ -26,12 +27,12 @@ import dbConnect from "@/common/types/utils/mongoose";
 export default async function handler(req, res) {
     const { method } = req;
 
-    dbConnect();
+    await dbConnect();
 
     if (method === "GET") {
         try {
-            const products = await Product.find();
-            res.status(201).json(products);
+        const products = await Product.find();
+            res.status(200).json(products);
         } catch (err) {
             res.status(500).json(err);
         }

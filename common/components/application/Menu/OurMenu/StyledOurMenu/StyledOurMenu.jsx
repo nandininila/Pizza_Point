@@ -125,7 +125,7 @@ const StyledOurMenu = () => {
       />
       <Container>
         <LeftImg>
-          <Image src={L_Img} alt="LImg" />
+          <Image src={L_Img} alt="LImg" priority />
         </LeftImg>
 
         <DiscoverOurMenu>
@@ -135,7 +135,7 @@ const StyledOurMenu = () => {
           </Texts>
 
           <MenuButtons>
-            {uniqueCategories.map((c, i) => (
+            {uniqueCategories?.map((c, i) => (
               <MenuButton
                 variant="outlined"
                 size={responsive}
@@ -163,7 +163,7 @@ const StyledOurMenu = () => {
         </DiscoverOurMenu>
 
         <RightImg>
-          <Image src={R_Img} alt="RImg" />
+          <Image src={R_Img} alt="RImg" priority />
         </RightImg>
       </Container>
     </Main>

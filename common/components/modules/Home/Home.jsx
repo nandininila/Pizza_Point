@@ -1,4 +1,3 @@
-import Carousel from "@/common/components/marketing/Carousel/StyledCarousel/StyledCarousel";
 import OurMenu from "../../application/Menu/OurMenu/OurMenu";
 import PizzaCards from "../../ecommerce/PizzaCards/PizzaCards";
 import styles from "./Home.module.css";
@@ -9,7 +8,7 @@ const Home = ({ allServerData }) => {
 
   return (
     <main className={styles}>
-      <Carousel />
+      {/* <Carousel /> */}
       <OurMenu />
       <PizzaCards allServerData={allServerData} />
     </main>

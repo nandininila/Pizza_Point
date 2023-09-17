@@ -142,14 +142,18 @@ const SearchBox = styled("div")(({ theme }) =>
   })
 );
 
-const Main = styled("div")(({ theme }) =>
+const Main = styled("div")(({ theme }) => theme.unstable_sx({}));
+
+const Container = styled("div")(({ theme }) =>
   theme.unstable_sx({
+    maxWidth: "lg",
+    margin: "0 auto",
+    px: { xs: 2, sm: 3, md: 5 },
+
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    px: createFluidValue(0.4, 1),
     height: createFluidValue(3, 5),
-    // userSelect: "none",
   })
 );
 
@@ -175,85 +179,87 @@ const StyledNav = () => {
 
   return (
     <Main>
-      <Logo>
-        <Image src={logo} alt="Logo" />
-        <Title>
-          <span>Pizza</span>
-          <span>Point</span>
-        </Title>
-      </Logo>
+      <Container>
+        <Logo>
+          <Image src={logo} alt="Logo" />
+          <Title>
+            <span>Pizza</span>
+            <span>Point</span>
+          </Title>
+        </Logo>
 
-      {NavLinks.map((link, i) => (
-        <NavLink
-          key={i}
-          sx={{
-            borderBottom: currentRoute(i, link.href)
-              ? ".13em solid #db2527"
-              : 0,
-            // transform: currentRoute(i, link.href) ? "scale(1.1)" : "initial",
-          }}
-        >
-          <Typography
-            component={"a"}
-            href={link?.href}
-            style={{
-              color: currentRoute(i, link.href) ? "#db2527" : null,
-              fontWeight: currentRoute(i, link.href) ? "600" : null,
-            }}
-          >
-            {link?.name}
-          </Typography>
-        </NavLink>
-      ))}
-
-      <Drawer open={open} anchor={"left"} onClose={() => setOpen(false)}>
-        <NavDrawer onClick={() => setOpen(false)}>
-          <NavDrawerLogo>
-            <Image src={logo} height={"32"} width={"32"} alt="Logo" />
-            <Title>
-              <span>Pizza</span>
-              <span>Point</span>
-            </Title>
-          </NavDrawerLogo>
-
-          <Divider />
-
-          <Box
+        {NavLinks.map((link, i) => (
+          <NavLink
+            key={i}
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              borderBottom: currentRoute(i, link.href)
+                ? ".13em solid #db2527"
+                : 0,
+              // transform: currentRoute(i, link.href) ? "scale(1.1)" : "initial",
             }}
           >
-            <List>
-              {data.map((item, index) => (
-                <ListItemButton key={index}>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.name} />
-                </ListItemButton>
-              ))}
-            </List>
-          </Box>
-        </NavDrawer>
-      </Drawer>
+            <Typography
+              component={"a"}
+              href={link?.href}
+              style={{
+                color: currentRoute(i, link.href) ? "#db2527" : null,
+                fontWeight: currentRoute(i, link.href) ? "600" : null,
+              }}
+            >
+              {link?.name}
+            </Typography>
+          </NavLink>
+        ))}
 
-      <SearchBox>
-        <IconButton>
-          <IoSearch />
-        </IconButton>
-      </SearchBox>
+        <Drawer open={open} anchor={"left"} onClose={() => setOpen(false)}>
+          <NavDrawer onClick={() => setOpen(false)}>
+            <NavDrawerLogo>
+              <Image src={logo} height={"32"} width={"32"} alt="Logo" />
+              <Title>
+                <span>Pizza</span>
+                <span>Point</span>
+              </Title>
+            </NavDrawerLogo>
 
-      <Tooltip title={themeLight ? "Dark Mode" : "Light Mode"}>
-        <IconButton onClick={handleThemeToggle}>
-          {themeLight ? <DarkModeIcon /> : <LightModeIcon />}
-        </IconButton>
-      </Tooltip>
+            <Divider />
 
-      <MenuButton>
-        <IconButton size="small" onClick={() => setOpen(true)}>
-          <MenuIcon fontSize="inherit" />
-        </IconButton>
-      </MenuButton>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <List>
+                {data.map((item, index) => (
+                  <ListItemButton key={index}>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.name} />
+                  </ListItemButton>
+                ))}
+              </List>
+            </Box>
+          </NavDrawer>
+        </Drawer>
+
+        <SearchBox>
+          <IconButton>
+            <IoSearch />
+          </IconButton>
+        </SearchBox>
+
+        <Tooltip title={themeLight ? "Dark Mode" : "Light Mode"}>
+          <IconButton onClick={handleThemeToggle}>
+            {themeLight ? <DarkModeIcon /> : <LightModeIcon />}
+          </IconButton>
+        </Tooltip>
+
+        <MenuButton>
+          <IconButton size="small" onClick={() => setOpen(true)}>
+            <MenuIcon fontSize="inherit" />
+          </IconButton>
+        </MenuButton>
+      </Container>
     </Main>
   );
 };
