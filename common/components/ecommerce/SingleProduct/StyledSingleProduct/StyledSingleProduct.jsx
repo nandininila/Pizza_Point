@@ -26,6 +26,7 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
   const [price, setPrice] = useState(roundNumber(product?.price));
   const [size, setSize] = useState(price);
   const [selectedSizeIndex, setSelectedSizeIndex] = useState(0);
+  const [extras, setExtras] = useState([]);
 
   const changePrice = (number) => {
     setPrice(roundNumber(price + number));
@@ -56,8 +57,10 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
 
     if (checked === true) {
       changePrice(roundNumber(optionPrice));
+      setExtras((prev) => [...prev, option]);
     } else {
       changePrice(roundNumber(-optionPrice));
+      setExtras(extras.filter((extra) => extra._id !== option._id));
     }
   };
 
