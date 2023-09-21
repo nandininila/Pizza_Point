@@ -1,5 +1,6 @@
 import { frontendOrigin } from "@/common/types/utils/const";
 import {
+  Badge,
   Box,
   Divider,
   Drawer,
@@ -28,8 +29,10 @@ import { useContext, useState } from "react";
 
 import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
 import { createFluidValue } from "@/common/hooks/FluidValue/mix/FluidValue";
+import { ShoppingCart } from "@mui/icons-material";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { IoSearch } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 const Logo = styled("div")(({ theme }) =>
   theme.unstable_sx({
@@ -131,7 +134,7 @@ const MenuButton = styled("div")(({ theme }) =>
   })
 );
 
-const SearchBox = styled("div")(({ theme }) =>
+const Cart = styled("div")(({ theme }) =>
   theme.unstable_sx({
     "& button": {
       fontSize: createFluidValue(1, 1.4),
@@ -158,6 +161,8 @@ const Container = styled("div")(({ theme }) =>
 );
 
 const StyledNav = () => {
+  const quantity = useSelector((state) => state.cart.quantity);
+
   const { themeLight, setThemeType } = useContext(ThemeContext);
   const handleThemeToggle = () => {
     setThemeType(!themeLight);
@@ -242,11 +247,15 @@ const StyledNav = () => {
           </NavDrawer>
         </Drawer>
 
-        <SearchBox>
-          <IconButton>
-            <IoSearch />
-          </IconButton>
-        </SearchBox>
+        <Cart>
+          <Link href="/cart" passHref>
+            <IconButton>
+              <Badge badgeContent={quantity} color="warning">
+                <ShoppingCart />
+              </Badge>
+            </IconButton>
+          </Link>
+        </Cart>
 
         <Tooltip title={themeLight ? "Dark Mode" : "Light Mode"}>
           <IconButton onClick={handleThemeToggle}>
