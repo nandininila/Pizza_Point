@@ -135,8 +135,15 @@ const StyledCart = () => {
               </Item>
 
               <Item item xs={12} sm={2}>
-                <Box display={"flex"} alignItems={"center"}>
+                <Box
+                  display={"flex"}
+                  alignItems={"center"}
+                  border={1}
+                  borderRadius={5}
+                  borderColor={"ButtonShadow"}
+                >
                   <IconButton
+                    size="small"
                     color="error"
                     title="decrease"
                     disabled={product?.quantity === 1}
@@ -151,8 +158,11 @@ const StyledCart = () => {
                   >
                     <Remove />
                   </IconButton>
-                  <Typography>{product?.quantity}</Typography>
+                  <Typography px={1} fontWeight="medium">
+                    {product?.quantity}
+                  </Typography>
                   <IconButton
+                    size="small"
                     color="success"
                     title="increase"
                     disabled={product?.quantity === 10}
@@ -164,20 +174,28 @@ const StyledCart = () => {
                   </IconButton>
                 </Box>
               </Item>
-              <Item item xs={12} sm={2.5}>
+              <Item item xs={12} sm={1.5}>
                 <Typography fontWeight={"bold"} variant="h6" gutterBottom>
                   <small>$</small>
                   {product?.price * product?.quantity}
                 </Typography>
               </Item>
 
-              <Item item xs={12} sm={0.5}>
+              <Item
+                item
+                xs={12}
+                sm={1.5}
+                justifyContent={{ xs: "center", sm: "right" }}
+              >
                 <Button
                   title="Remove"
                   color="error"
                   variant="contained"
-                  fullWidth
-                  sx={{ height: "100%", py: 1 }}
+                  sx={{
+                    height: "100%",
+                    width: { xs: "100%", sm: "initial" },
+                    py: 1,
+                  }}
                   onClick={() => handleRemove(product?.customId)}
                 >
                   <DeleteOutline />
@@ -187,32 +205,56 @@ const StyledCart = () => {
           </Paper>
         ))}
 
-        <Paper sx={{ flexGrow: 1, py: 2 }} elevation={3}>
-          <Grid container justifyContent={"center"} alignItems={"center"}>
-            <Grid item>
+        <Paper sx={{ p: 2, width: "100%" }} elevation={3}>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-around"
+            alignItems="center"
+            gap={2}
+          >
+            <Grid item xs={12}>
               <Typography
+                textAlign="center"
                 variant="h6"
-                gutterBottom
+                paragraph
                 sx={{
                   textDecoration: "underline",
-                  textUnderlineOffset: 5,
+                  textUnderlineOffset: 7,
                 }}
               >
-                Cart Total
+                Order Summary
+              </Typography>
+            </Grid>
+
+            <Grid item>
+              <Typography variant="body2" gutterBottom>
+                Price
               </Typography>
               <Typography variant="body2" gutterBottom>
-                Price: ${cart?.total}
+                Discount
               </Typography>
               <Typography variant="body2" gutterBottom>
-                Discount: $0
+                Subtotal
+              </Typography>
+              <Typography variant="h6">Total</Typography>
+            </Grid>
+
+            <Grid item>
+              <Typography variant="body2" gutterBottom>
+                ${cart?.total}
               </Typography>
               <Typography variant="body2" gutterBottom>
-                Subtotal: $0
+                $0
               </Typography>
-              <Typography variant="h6" gutterBottom>
-                Total: ${cart?.total}
+              <Typography variant="body2" gutterBottom>
+                $0
               </Typography>
-              <Button variant="contained" color="success">
+              <Typography variant="h6">${cart?.total}</Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Button variant="contained" color="warning" fullWidth>
                 Checkout Now
               </Button>
             </Grid>
