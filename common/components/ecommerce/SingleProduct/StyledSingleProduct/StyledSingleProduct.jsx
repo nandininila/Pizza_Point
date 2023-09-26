@@ -7,11 +7,12 @@ import {
   Stack,
   Typography,
   styled,
-  useTheme,
 } from "@mui/material";
 
+import { addProduct } from "@/redux/cartSlice";
 import { Add, Remove } from "@mui/icons-material";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const StyledSingleProduct = ({ singleProduct: product }) => {
   const [checkedState, setCheckedState] = useState(
@@ -23,10 +24,15 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
   };
 
   const [quantity, setQuantity] = useState(1);
+  const [randomNum, setRandomNum] = useState(
+    Math.floor(Math.random() * 10000000)
+  );
   const [price, setPrice] = useState(roundNumber(product?.price));
   const [size, setSize] = useState(price);
+  const [sizeName, setSizeName] = useState("Small");
   const [selectedSizeIndex, setSelectedSizeIndex] = useState(0);
   const [extras, setExtras] = useState([]);
+  const dispatch = useDispatch();
 
   const changePrice = (number) => {
     setPrice(roundNumber(price + number));
@@ -64,14 +70,25 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
     }
   };
 
-  //
-
-  const theme = useTheme();
-  let mode = theme.palette.mode;
+  // redux
+  const handleAddToCart = () => {
+    setRandomNum(Math.floor(Math.random() * 1000000));
+    dispatch(
+      addProduct({
+        ...product,
+        sizeName,
+        extras,
+        price,
+        quantity,
+        customId: randomNum,
+      })
+    );
+  };
 
   const Main = styled("div")(({ theme }) =>
     theme.unstable_sx({
-      backgroundColor: mode === "dark" ? "action.hover" : "background.paper",
+      backgroundColor:
+        theme.palette.mode === "dark" ? "action.hover" : "background.paper",
     })
   );
 
@@ -150,6 +167,7 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
                 onClick={() => {
                   handleSize(size?.price);
                   setSelectedSizeIndex(i);
+                  setSizeName(size?.name);
                 }}
               />
             ))}
@@ -198,16 +216,6 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
                 checked={checkedState[index]}
                 onChange={(e) => handleExtras(e, option, index)}
               />
-              // <div style={{ display: "flex", margin: "10px" }} key={option._id}>
-              //   <input
-              //     type="checkbox"
-              //     id={option?._id}
-              //     name={option?.name}
-              //     checked={checkedState[index]}
-              //     onChange={(e) => handleExtras(e, option, index)}
-              //   />
-              //   <label htmlFor={option?.name}>{option?.name}</label>
-              // </div>
             ))}
 
             <Typography
@@ -231,6 +239,7 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
                 }}
               >
                 <Button
+                  disabled={quantity === 1}
                   sx={{ borderRadius: 12 }}
                   onClick={() => setQuantity(quantity - 1)}
                 >
@@ -238,6 +247,7 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
                 </Button>
                 <Button sx={{ pointerEvents: "none" }}>{quantity}</Button>
                 <Button
+                  disabled={quantity === 10}
                   sx={{ borderRadius: 12 }}
                   onClick={() => setQuantity(quantity + 1)}
                 >
@@ -249,6 +259,7 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
                 variant="outlined"
                 color="warning"
                 sx={{ borderRadius: 12, textTransform: "capitalize" }}
+                onClick={handleAddToCart}
               >
                 Add to cart
               </Button>
