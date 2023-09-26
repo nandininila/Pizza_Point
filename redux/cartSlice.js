@@ -42,16 +42,17 @@ const cartSlice = createSlice({
             state.total = 0;
         },
 
-        deleteProduct: (state, action) => ({
-            ...state,
-            products: state.products.filter(
+        deleteProduct: (state, action) => {
+            const updatedProducts = state.products.filter(
                 (item) => item.customId !== action.payload.customId
-            ),
-        }),
+            );
 
-        updateCart: (state, action) => {
-            state.quantity -= 1;
-            state.total -= action.payload.price * action.payload.quantity;
+            return {
+                ...state,
+                products: updatedProducts,
+                quantity: state.quantity - 1,
+                total: state.total - action.payload.price * action.payload.quantity,
+            }
         },
     },
 });

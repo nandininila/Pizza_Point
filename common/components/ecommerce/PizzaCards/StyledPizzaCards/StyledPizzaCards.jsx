@@ -105,6 +105,7 @@ const StyledPizzaCards = ({ allServerData }) => {
                       />
                       <CardContent sx={{ pb: 1 }}>
                         <Typography
+                          color={"initial"}
                           noWrap
                           sx={{
                             fontSize: {

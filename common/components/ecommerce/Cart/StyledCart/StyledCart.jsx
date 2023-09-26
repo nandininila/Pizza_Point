@@ -2,7 +2,6 @@ import {
   decreaseQuantity,
   deleteProduct,
   increaseQuantity,
-  updateCart,
 } from "@/redux/cartSlice";
 import { Add, DeleteOutline, Remove } from "@mui/icons-material";
 import {
@@ -14,6 +13,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
+import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 
 const StyledCart = () => {
@@ -46,9 +46,12 @@ const StyledCart = () => {
   const handleRemove = (customId) => {
     cart.products.forEach((product) => {
       if (product.customId == customId) {
-        dispatch(deleteProduct({ customId: product.customId }));
         dispatch(
-          updateCart({ price: product.price, quantity: product.quantity })
+          deleteProduct({
+            customId: product.customId,
+            price: product.price,
+            quantity: product.quantity,
+          })
         );
       }
     });
@@ -74,8 +77,6 @@ const StyledCart = () => {
     color: theme.palette.text.secondary,
   }));
 
-  console.log("cart", cart);
-
   return (
     <Main>
       <Container>
@@ -88,9 +89,11 @@ const StyledCart = () => {
                 sm={2}
                 justifyContent={{ xs: "center", sm: "left" }}
               >
-                <Box maxWidth={150}>
-                  <img src={product?.image} alt={product?.name} />
-                </Box>
+                <Link href={`product/${product?._id}`} passHref>
+                  <Box maxWidth={150}>
+                    <img src={product?.image} alt={product?.name} />
+                  </Box>
+                </Link>
               </Item>
               <Item item xs={12} sm={5} py={1}>
                 <Box>

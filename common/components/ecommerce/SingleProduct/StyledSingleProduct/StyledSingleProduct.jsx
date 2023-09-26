@@ -7,7 +7,6 @@ import {
   Stack,
   Typography,
   styled,
-  useTheme,
 } from "@mui/material";
 
 import { addProduct } from "@/redux/cartSlice";
@@ -86,12 +85,10 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
     );
   };
 
-  const theme = useTheme();
-  let mode = theme.palette.mode;
-
   const Main = styled("div")(({ theme }) =>
     theme.unstable_sx({
-      backgroundColor: mode === "dark" ? "action.hover" : "background.paper",
+      backgroundColor:
+        theme.palette.mode === "dark" ? "action.hover" : "background.paper",
     })
   );
 
