@@ -208,7 +208,10 @@ const StyledCart = () => {
           </Paper>
         ))}
 
-        <Paper sx={{ p: 2, width: "100%" }} elevation={3}>
+        <Paper
+          sx={{ p: 2, width: "100%", mt: cart.quantity > 0 && 5 }}
+          elevation={3}
+        >
           <Grid
             container
             direction="row"
