@@ -69,7 +69,6 @@ const MenuButton = styled(Button)(({ theme }) =>
     textTransform: "capitalize",
     py: 0,
     borderRadius: 25,
-    fontSize: createFluidValue(0.6, 1.1),
   })
 );
 
@@ -79,12 +78,12 @@ const Texts = styled("div")(({ theme }) =>
 
     "p:nth-of-type(1)": {
       color: "warning.light",
-      fontSize: createFluidValue(0.65, 1.3),
+      fontSize: createFluidValue(0.8, 1),
     },
 
     "p:nth-of-type(2)": {
       fontWeight: "bold",
-      fontSize: createFluidValue(0.9, 1.8),
+      fontSize: createFluidValue(1.1, 1.5),
     },
   })
 );

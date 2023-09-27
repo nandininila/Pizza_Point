@@ -109,10 +109,9 @@ const StyledPizzaCards = ({ allServerData }) => {
                           noWrap
                           sx={{
                             fontSize: {
-                              xs: " 0.875rem",
                               mobileL: "1rem",
                               sm: "1.1rem",
-                              md: "1.4rem",
+                              md: "1.15rem",
                             },
                             fontWeight: "medium",
                           }}
@@ -148,7 +147,6 @@ const StyledPizzaCards = ({ allServerData }) => {
                           xs: "1rem",
                           mobileL: "1.1rem",
                           sm: "1.3rem",
-                          md: "1.5rem",
                         },
                         fontWeight: "bold",
                       }}
