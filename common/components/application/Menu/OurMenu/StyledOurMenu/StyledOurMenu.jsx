@@ -24,12 +24,8 @@ const Container = styled("div")(({ theme }) =>
   theme.unstable_sx({
     maxWidth: "lg",
     margin: "0 auto",
-    px: createFluidValue(0.4, 1),
-
+    px: { xs: 2, sm: 3, md: 5 },
     display: "flex",
-    // alignSelf: "center",
-    // backdropFilter: `blur(${createFluidValue(0.2, 1)})`,
-    // backgroundColor: "rgba(255, 255, 255, 0)",
   })
 );
 

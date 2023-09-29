@@ -1,3 +1,4 @@
+import About from "../../application/About/About";
 import OurMenu from "../../application/Menu/OurMenu/OurMenu";
 import PizzaCards from "../../ecommerce/PizzaCards/PizzaCards";
 import styles from "./Home.module.css";
@@ -11,6 +12,7 @@ const Home = ({ allServerData }) => {
       {/* <Carousel /> */}
       <OurMenu />
       <PizzaCards allServerData={allServerData} />
+      <About />
     </main>
   );
 };
