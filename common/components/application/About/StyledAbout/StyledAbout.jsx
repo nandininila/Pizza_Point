@@ -3,7 +3,6 @@ import { Box, Grid, Typography, styled, useTheme } from "@mui/material";
 // styles
 const Main = styled("div")(({ theme }) =>
   theme.unstable_sx({
-    // bgcolor: theme.palette.mode === "dark" ? "active.hover" : "ButtonShadow",
     bgcolor:
       theme.palette.mode === "dark"
         ? "rgba(255, 255, 255, 0.05)"
