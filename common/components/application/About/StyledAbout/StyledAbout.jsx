@@ -1,47 +1,13 @@
-import { createFluidValue } from "@/common/hooks/FluidValue/mix/FluidValue";
-import { Box, Grid, Paper, Typography, styled } from "@mui/material";
+import { Box, Grid, Typography, styled, useTheme } from "@mui/material";
 
 // styles
 const Main = styled("div")(({ theme }) =>
   theme.unstable_sx({
-    bgcolor: theme.palette.mode === "dark" ? "initial" : "ButtonShadow",
-  })
-);
-
-const ImgContainer = styled("div")(({ theme }) =>
-  theme.unstable_sx({
-    "& div": {
-      position: "absolute",
-    },
-
-    "div:nth-of-type(1)": {
-      top: 0,
-      width: "10%",
-    },
-    "div:nth-of-type(2)": {
-      opacity: 0.3,
-      width: "10%",
-      bottom: 0,
-      left: createFluidValue(2, 0),
-    },
-    "div:nth-of-type(3)": {
-      // top: createFluidValue(1, 4.5),
-      // right: createFluidValue(0.3, 1.2),
-      width: "14%",
-      right: "25%",
-    },
-    "div:nth-of-type(4)": {
-      // top: createFluidValue(1, 4),
-      width: "10%",
-      right: "25%",
-    },
-  })
-);
-
-const Item = styled(Paper)(({ theme }) =>
-  theme.unstable_sx({
-    p: 1,
-    // m: 1,
+    // bgcolor: theme.palette.mode === "dark" ? "active.hover" : "ButtonShadow",
+    bgcolor:
+      theme.palette.mode === "dark"
+        ? "rgba(255, 255, 255, 0.05)"
+        : "ButtonShadow",
   })
 );
 
@@ -55,6 +21,8 @@ const Container = styled("div")(({ theme }) =>
 );
 
 const StyledAbout = () => {
+  const theme = useTheme();
+  let mode = theme.palette.mode;
   return (
     <Main>
       <Container>
@@ -62,7 +30,12 @@ const StyledAbout = () => {
           <Grid item xs={12} display={{ xs: "none", tablet: "block" }}>
             <Grid container justifyContent="space-between">
               <Grid item>
-                <div style={{ maxWidth: 130, opacity: 0.8 }}>
+                <div
+                  style={{
+                    maxWidth: 130,
+                    opacity: mode === "dark" ? 0.5 : 0.8,
+                  }}
+                >
                   <img
                     src="https://res.cloudinary.com/united1234/image/upload/v1695919472/pizza-point/sketches/pizza-illo-2_r6aqms.webp"
                     alt="pizza_slice"
@@ -73,7 +46,7 @@ const StyledAbout = () => {
                 <div
                   style={{
                     width: 130,
-                    opacity: 0.05,
+                    opacity: mode === "dark" ? 0.4 : 0.05,
                     rotate: "90deg",
                     position: "absolute",
                     left: -120,
@@ -91,7 +64,7 @@ const StyledAbout = () => {
                   width={{ tablet: 150, md: 200 }}
                   sx={{
                     position: "absolute",
-                    opacity: 0.2,
+                    opacity: mode === "dark" ? 0.4 : 0.2,
                     right: 35,
                     transform: "skewX(-35deg)",
                     rotate: "20deg",
@@ -158,7 +131,12 @@ const StyledAbout = () => {
           <Grid item xs={12} display={{ xs: "none", tablet: "block" }}>
             <Grid container justifyContent="space-between" position="relative">
               <Grid item>
-                <div style={{ maxWidth: 120, opacity: 0.2 }}>
+                <div
+                  style={{
+                    maxWidth: 120,
+                    opacity: mode === "dark" ? 1 : 0.2,
+                  }}
+                >
                   <img
                     src="https://res.cloudinary.com/united1234/image/upload/v1695919473/pizza-point/sketches/roll_sketch_wjpudp.webp"
                     alt="roll_sketch"
@@ -166,7 +144,11 @@ const StyledAbout = () => {
                 </div>
               </Grid>
               <Grid item position="absolute" left="43%" bottom="-70%">
-                <div style={{ width: 150 }}>
+                <div
+                  style={{
+                    width: 150,
+                  }}
+                >
                   <img
                     src="https://res.cloudinary.com/united1234/image/upload/v1695983619/pizza-point/sketches/onion_slice_dnxmku.webp"
                     alt="onion_slice"
@@ -177,7 +159,7 @@ const StyledAbout = () => {
                 <div
                   style={{
                     width: 200,
-                    opacity: 0.2,
+                    opacity: mode === "dark" ? 1 : 0.2,
                     rotate: "-45deg",
                     position: "absolute",
                     right: 0,
