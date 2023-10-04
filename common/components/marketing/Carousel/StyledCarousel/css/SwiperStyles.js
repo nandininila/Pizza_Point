@@ -8,6 +8,7 @@ export const SwiperStyles = {
     "--swiper-pagination-bullet-inactive-color": "#999999",
     "--swiper-pagination-bullet-inactive-opacity": "1",
     "--swiper-pagination-bullet-offset": `${createFluidValue(0.13, .34)}`,
+    "--swiper-pagination-bullet-active-outline": "1px solid #db2527",
 
     "--swiper-pagination-bullet-size": `${createFluidValue(0.3, .7)}`,
     "--swiper-pagination-bullet-horizontal-gap": `${createFluidValue(

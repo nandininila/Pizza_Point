@@ -83,7 +83,7 @@
 }
 
 .swiper-pagination-bullet-active {
-  outline: 1px solid #db2527;
+  outline: var(--swiper-pagination-bullet-active-outline);
   border-radius: 50% !important;
   outline-offset: var(--swiper-pagination-bullet-offset);
 }
