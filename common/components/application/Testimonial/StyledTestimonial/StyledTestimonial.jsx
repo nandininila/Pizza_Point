@@ -1,4 +1,4 @@
-import { Grid, Typography, styled } from "@mui/material";
+import { Box, Grid, Typography, styled } from "@mui/material";
 import Slides from "./Slides/Slides";
 
 // styles
@@ -24,13 +24,14 @@ const StyledTestimonial = () => {
         <Grid
           container
           py={{ xs: 6, tablet: 10 }}
-          alignItems="center"
+          // alignItems="center"
           justifyContent="center"
           columnSpacing={{ tablet: 5 }}
           rowGap={5}
         >
           <Grid item xs={12} tablet={6}>
             <Typography
+              pt={{ tablet: 2.5 }}
               variant="h6"
               fontWeight="bold"
               textAlign={{ xs: "center", tablet: "initial" }}
@@ -46,12 +47,23 @@ const StyledTestimonial = () => {
             >
               We Have 50 Happy Reviews
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" paragraph>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Voluptatum, atque! Eos minus tempore fugit placeat, voluptate
               perspiciatis sit accusantium recusandae facere temporibus a
               nostrum animi cupiditate quia sunt quasi nemo.
             </Typography>
+
+            <Box
+              display={{ xs: "none", tablet: "block" }}
+              position="relative"
+              maxWidth={400}
+            >
+              <img
+                style={{ position: "absolute", top: -80 }}
+                src="https://res.cloudinary.com/united1234/image/upload/v1696435066/pizza-point/sketches/red_chilli_gwwfjz.webp"
+              />
+            </Box>
           </Grid>
           <Grid item xs={12} tablet={6}>
             <Slides />

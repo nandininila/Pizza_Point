@@ -91,7 +91,12 @@ const Slides = () => {
                 sx={{ position: "absolute", top: "-15%" }}
               />
 
-              <Typography variant="body2" color="text.secondary" gutterBottom>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                gutterBottom
+                textAlign="center"
+              >
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               </Typography>
               <Typography fontWeight="600" variant="subtitle1" noWrap>
