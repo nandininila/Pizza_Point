@@ -99,6 +99,7 @@ const StyledAbout = () => {
                   variant="body2"
                   color="warning.main"
                   textAlign={{ xs: "center", tablet: "initial" }}
+                  textTransform="uppercase"
                 >
                   About Us
                 </Typography>
