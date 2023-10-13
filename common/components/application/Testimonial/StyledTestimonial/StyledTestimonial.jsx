@@ -27,7 +27,7 @@ const StyledTestimonial = () => {
           // alignItems="center"
           justifyContent="center"
           columnSpacing={{ tablet: 5 }}
-          rowGap={5}
+          rowGap={1}
         >
           <Grid item xs={12} tablet={6}>
             <Typography

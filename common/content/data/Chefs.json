@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Jenny Wilson",
+    "designation": "Senior Chef",
+    "image": "https://res.cloudinary.com/united1234/image/upload/v1696664102/pizza-point/Chefs/chef5_aftyaq.webp"
+  },
+  {
+    "id": 2,
+    "name": "Annette Black",
+    "designation": "Senior Chef",
+    "image": "https://res.cloudinary.com/united1234/image/upload/v1696604062/pizza-point/Chefs/chef1_pcwp9h.webp"
+  },
+  {
+    "id": 3,
+    "name": "Teresa Webb",
+    "designation": "Senior Chef",
+    "image": "https://res.cloudinary.com/united1234/image/upload/v1696604063/pizza-point/Chefs/chef2_ml0pzz.webp"
+  },
+  {
+    "id": 4,
+    "name": "Albert Flores",
+    "designation": "Senior Chef",
+    "image": "https://res.cloudinary.com/united1234/image/upload/v1696604066/pizza-point/Chefs/chef4_phyvoe.webp"
+  }
+]
