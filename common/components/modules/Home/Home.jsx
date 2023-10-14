@@ -1,5 +1,6 @@
 import About from "../../application/About/About";
 import Chefs from "../../application/Chefs/Chefs";
+import Commitment from "../../application/Commitment/Commitment";
 import OurMenu from "../../application/Menu/OurMenu/OurMenu";
 import Testimonial from "../../application/Testimonial/Testimonial";
 import PizzaCards from "../../ecommerce/PizzaCards/PizzaCards";
@@ -17,6 +18,7 @@ const Home = ({ allServerData }) => {
       <About />
       <Testimonial />
       <Chefs />
+      <Commitment />
     </main>
   );
 };
