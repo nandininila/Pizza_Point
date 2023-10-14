@@ -186,16 +186,13 @@ const StyledChefs = () => {
                               sx={{
                                 position: "absolute",
                                 bottom: "10%",
-                                p: "3% 15%",
+                                p: "5% 15%",
                                 color: "black",
                                 borderRadius: 1.5,
                                 backgroundColor:
                                   i === index
                                     ? alpha("#ecbe92", 0.85)
-                                    : alpha(
-                                        theme.palette.background.paper,
-                                        0.85
-                                      ),
+                                    : alpha("#ffff", 0.85),
                               }}
                             >
                               <Typography
