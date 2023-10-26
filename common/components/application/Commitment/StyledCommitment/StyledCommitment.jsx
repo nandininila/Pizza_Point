@@ -8,14 +8,7 @@ import {
 } from "@mui/material";
 
 // styles
-const Main = styled("div")(({ theme }) =>
-  theme.unstable_sx({
-    // bgcolor:
-    //   theme.palette.mode === "dark"
-    //     ? "rgba(255, 255, 255, 0.05)"
-    //     : "ButtonShadow",
-  })
-);
+const Main = styled("div")(({ theme }) => theme.unstable_sx({}));
 
 const Container = styled("div")(({ theme }) =>
   theme.unstable_sx({
@@ -110,7 +103,7 @@ const StyledCommitment = () => {
                   background: `radial-gradient(at 50% ${colorPosition}, #ff9800 ${colorEfe}, transparent 70%)`,
                 }}
               >
-                <img src={deliverImg} alt="delivery_man" srcset="" />
+                <img src={deliverImg} alt="delivery_man" />
               </Box>
             </Item>
           </Grid>
