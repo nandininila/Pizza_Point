@@ -113,7 +113,7 @@ const StyledChefs = () => {
               <Grid item pt={{ xs: 0, tablet: 9 }}>
                 <Typography
                   variant="body2"
-                  color="warning.main"
+                  color="warning.light"
                   textAlign="center"
                   textTransform="uppercase"
                 >
