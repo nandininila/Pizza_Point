@@ -1,5 +1,5 @@
 import Themes from "@/Themes/Themes";
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import Footer from "../components/shared/Footer/Footer";
 import Navbar from "../components/shared/Navbar/Navbar";
 import ThemeModeProvider from "../contexts/ThemeModeProvider";
@@ -9,9 +9,20 @@ const Layout = ({ children }) => {
     <ThemeModeProvider>
       <Themes>
         <CssBaseline enableColorScheme />
-        <Navbar />
-        {children}
-        <Footer />
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"space-between"}
+          height={"100vh"}
+        >
+          <Box>
+            <Navbar />
+            {children}
+          </Box>
+          <Box>
+            <Footer />
+          </Box>
+        </Box>
       </Themes>
     </ThemeModeProvider>
   );

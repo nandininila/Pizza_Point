@@ -31,7 +31,6 @@ const Container = styled("div")(({ theme }) =>
     maxWidth: "lg",
     margin: "0 auto",
     px: { xs: 2, sm: 3, md: 5 },
-    pt: 2,
   })
 );
 
@@ -105,7 +104,8 @@ const StyledFooter = () => {
       <Paper>
         <Container>
           <Box
-            pt={{ xs: 2, tablet: 6 }}
+            mt={4}
+            pt={4}
             display={"flex"}
             flexDirection={"column"}
             gap={{ xs: 6, tablet: 8 }}
