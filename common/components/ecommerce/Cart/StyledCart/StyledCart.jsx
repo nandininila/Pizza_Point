@@ -1,7 +1,9 @@
+import { frontendOrigin } from "@/common/types/utils/const";
 import {
   decreaseQuantity,
   deleteProduct,
   increaseQuantity,
+  reset,
 } from "@/redux/cartSlice";
 import { Add, DeleteOutline, Remove } from "@mui/icons-material";
 import {
@@ -13,13 +15,22 @@ import {
   Typography,
   styled,
 } from "@mui/material";
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import OrderDetail from "../../OrderDetail/OrderDetail";
 
 const StyledCart = () => {
+  //local states
+  const [deliveryMethod, setDeliveryMethod] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
   // redux
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const router = useRouter();
 
   const handleIncrease = (product, customId, price) => {
     dispatch(
@@ -55,6 +66,23 @@ const StyledCart = () => {
         );
       }
     });
+  };
+
+  // create order
+  const createOrder = async (data) => {
+    try {
+      // Use the post method to create the Order data
+      const res = await axios.post(`${frontendOrigin}/api/orders`, data);
+      // If successful, redirect user to /orders/ page and pass the id of the Order we just created
+      // router is a nextJs function
+      if (res.status === 201) {
+        // After the order has been created, we then reset the Redux state manager (cart will be empty)
+        dispatch(reset());
+        router.push(`/orders/${res.data._id}`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // styled
@@ -208,64 +236,85 @@ const StyledCart = () => {
           </Paper>
         ))}
 
-        <Paper
-          sx={{ p: 2, width: "100%", mt: cart.quantity > 0 && 5 }}
-          elevation={3}
-        >
-          <Grid
-            container
-            direction="row"
-            justifyContent="space-around"
-            alignItems="center"
-            gap={2}
+        {cart.quantity > 0 ? (
+          <Paper
+            sx={{ p: 2, width: "100%", mt: cart.quantity > 0 && 5 }}
+            elevation={3}
           >
-            <Grid item xs={12}>
-              <Typography
-                textAlign="center"
-                variant="h6"
-                paragraph
-                sx={{
-                  textDecoration: "underline",
-                  textUnderlineOffset: 7,
-                }}
-              >
-                Order Summary
-              </Typography>
-            </Grid>
+            <Grid
+              container
+              direction="row"
+              justifyContent="space-around"
+              alignItems="center"
+              gap={2}
+            >
+              <Grid item xs={12}>
+                <Typography
+                  textAlign="center"
+                  variant="h6"
+                  paragraph
+                  sx={{
+                    textDecoration: "underline",
+                    textUnderlineOffset: 7,
+                  }}
+                >
+                  Order Summary
+                </Typography>
+              </Grid>
 
-            <Grid item>
-              <Typography variant="body2" gutterBottom>
-                Price
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                Discount
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                Subtotal
-              </Typography>
-              <Typography variant="h6">Total</Typography>
-            </Grid>
+              <Grid item>
+                <Typography variant="body2" gutterBottom>
+                  Price
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  Discount
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  Subtotal
+                </Typography>
+                <Typography variant="h6">Total</Typography>
+              </Grid>
 
-            <Grid item>
-              <Typography variant="body2" gutterBottom>
-                ${cart?.total}
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                $0
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                $0
-              </Typography>
-              <Typography variant="h6">${cart?.total}</Typography>
-            </Grid>
+              <Grid item>
+                <Typography variant="body2" gutterBottom>
+                  ${cart?.total}
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  $0
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  $0
+                </Typography>
+                <Typography variant="h6">${cart?.total}</Typography>
+              </Grid>
 
-            <Grid item xs={12}>
-              <Button variant="contained" color="warning" fullWidth>
-                Checkout Now
-              </Button>
+              <Grid item xs={12}>
+                {deliveryMethod ? (
+                  <Button
+                    onClick={() => setOpenModal(true)}
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                  >
+                    Cash on delivery
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => setDeliveryMethod(true)}
+                    variant="contained"
+                    color="warning"
+                    fullWidth
+                  >
+                    Checkout Now
+                  </Button>
+                )}
+              </Grid>
+              {openModal && <OrderDetail />}
             </Grid>
-          </Grid>
-        </Paper>
+          </Paper>
+        ) : (
+          "Card is empty"
+        )}
       </Container>
     </Main>
   );
