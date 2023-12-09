@@ -1,5 +1,5 @@
-import Themes from "@/Themes/Themes";
 import { Box, CssBaseline } from "@mui/material";
+import Themes from "../../Themes/Themes";
 import Footer from "../components/shared/Footer/Footer";
 import Navbar from "../components/shared/Navbar/Navbar";
 import ThemeModeProvider from "../contexts/ThemeModeProvider";

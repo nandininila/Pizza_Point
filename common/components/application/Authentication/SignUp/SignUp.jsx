@@ -1,4 +1,4 @@
-const { default: StyledSignUp } = require("./StyledSignUp/StyledSignUp");
+import StyledSignUp from "../SignUp/StyledSignUp/StyledSignUp";
 
 const SignUp = () => {
   return <StyledSignUp />;

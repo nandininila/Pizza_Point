@@ -1,8 +1,8 @@
 // import fs from "fs";
 // import path from "path";
 
-import Product from "@/common/models/Product";
-import dbConnect from "@/common/types/utils/mongoose";
+import Product from "../../../common/models/Product";
+import dbConnect from "../../../common/types//utils/mongoose";
 
 
 // const getData = () => {

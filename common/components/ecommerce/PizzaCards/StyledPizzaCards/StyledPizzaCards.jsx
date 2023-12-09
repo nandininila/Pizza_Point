@@ -1,4 +1,3 @@
-import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import {
   Card,
@@ -16,6 +15,7 @@ import {
 import arrayShuffle from "array-shuffle";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../../../../contexts/ThemeModeProvider";
 
 const Main = styled("div")(({ theme }) => theme.unstable_sx({}));
 

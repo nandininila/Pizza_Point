@@ -1,5 +1,3 @@
-import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
-import { createFluidValue } from "@/common/hooks/FluidValue/mix/FluidValue";
 import {
   Button,
   Typography,
@@ -8,11 +6,12 @@ import {
   useTheme,
 } from "@mui/material";
 import Image from "next/image";
+import { ThemeContext } from "../../../../../contexts/ThemeModeProvider";
+import { createFluidValue } from "../../../../../hooks/FluidValue/mix/FluidValue";
 
 import { useContext } from "react";
 import L_Img from "../../../../../content/images/Features/feature_1.webp";
 import R_Img from "../../../../../content/images/Features/feature_2.webp";
-import BackgroundImg from "/common/content/images/Background/BackgroundPaper.webp";
 
 const Main = styled("div")(({ theme }) =>
   theme.unstable_sx({
@@ -105,8 +104,9 @@ const StyledOurMenu = () => {
 
   return (
     <Main>
-      <Image
-        src={BackgroundImg}
+      <img
+        src="https://res.cloudinary.com/united1234/image/upload/v1701955935/pizza-point/background/BackgroundPaper_g4xubu.webp"
+        alt="BackgroundImage"
         style={{
           display: "none",
           zIndex: -1,
@@ -114,9 +114,6 @@ const StyledOurMenu = () => {
           objectFit: "cover",
           height: "100%",
         }}
-        priority
-        alt="BackgroundImage"
-        quality={100}
       />
       <Container>
         <LeftImg>

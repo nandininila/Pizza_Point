@@ -1,4 +1,4 @@
-const { default: Login } = require("@/common/components/application/Authentication/Login/Login")
+import Login from "../common/components/application/Authentication/Login/Login"
 
 const login = () => {
     return (

@@ -14,9 +14,9 @@ import {
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { BiLogoFacebookCircle, BiLogoInstagramAlt } from "react-icons/bi";
 
-import Chefs from "@/common/content/data/Chefs.json";
 import Link from "next/link";
 import { useState } from "react";
+import Chefs from "../../../../content/data/Chefs.json";
 
 // styles
 const Main = styled("div")(({ theme }) =>

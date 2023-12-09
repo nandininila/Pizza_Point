@@ -1,4 +1,3 @@
-import { frontendOrigin } from "@/common/types/utils/const";
 import {
   Badge,
   Box,
@@ -13,8 +12,6 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import Image from "next/image";
-import logo from "/common/content/logo/pizzaLogo.png";
 
 import ArticleIcon from "@mui/icons-material/Article";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
@@ -27,12 +24,13 @@ import StoreIcon from "@mui/icons-material/Store";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import { useContext, useState } from "react";
 
-import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
-import { createFluidValue } from "@/common/hooks/FluidValue/mix/FluidValue";
 import { ShoppingCart } from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import { ThemeContext } from "../../../../contexts/ThemeModeProvider";
+import { createFluidValue } from "../../../../hooks/FluidValue/mix/FluidValue";
+import { frontendOrigin } from "../../../../types/utils/const";
 
 const Logo = styled("div")(({ theme }) =>
   theme.unstable_sx({
@@ -186,7 +184,10 @@ const StyledNav = () => {
     <Main>
       <Container>
         <Logo>
-          <Image src={logo} alt="Logo" />
+          <img
+            src="https://res.cloudinary.com/united1234/image/upload/v1701943139/pizza-point/logo/pizzaLogo_al3tu4.png"
+            alt="Logo"
+          />
           <Title>
             <span>Pizza</span>
             <span>Point</span>
@@ -219,7 +220,10 @@ const StyledNav = () => {
         <Drawer open={open} anchor={"left"} onClose={() => setOpen(false)}>
           <NavDrawer onClick={() => setOpen(false)}>
             <NavDrawerLogo>
-              <Image src={logo} height={"32"} width={"32"} alt="Logo" />
+              <img
+                src="https://res.cloudinary.com/united1234/image/upload/v1701943139/pizza-point/logo/pizzaLogo_al3tu4.png"
+                alt="Logo"
+              />
               <Title>
                 <span>Pizza</span>
                 <span>Point</span>

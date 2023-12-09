@@ -1,9 +1,9 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { LoadingButton } from "@mui/lab";
 import {
   Avatar,
   Box,
-  Button,
   Checkbox,
   Container,
   FormControlLabel,
@@ -14,25 +14,57 @@ import {
   Typography,
   styled,
 } from "@mui/material";
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { frontendOrigin } from "../../../../../types//utils/const";
 // styles
 const Main = styled("div")(({ theme }) => theme.unstable_sx({}));
 
 const StyledLogin = () => {
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  const router = useRouter();
 
-  const handleSubmit = (event) => {
+  // Validation
+  const [error, setError] = useState("");
+  const [resMessage, setResMessage] = useState("");
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const email = data.get("email").toString().toLowerCase();
+    const password = data.get("password").toString();
+
+    const user = { email, password };
+
+    try {
+      const url = `${frontendOrigin}/api/login`;
+      const { data } = await axios.post(url, user);
+
+      console.log(data);
+      setError("");
+      setResMessage("");
+      setLoading(false);
+      router.push("/");
+    } catch (error) {
+      setLoading(false);
+      const { data } = error?.response;
+      if (data) {
+        console.error(data);
+        setError(data?.error);
+        setResMessage(data?.message);
+      } else {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -66,8 +98,11 @@ const StyledLogin = () => {
               id="email"
               label="Email Address"
               name="email"
+              type="email"
               autoComplete="email"
               autoFocus
+              error={error === "EmailError" && true}
+              helperText={error === "EmailError" && resMessage}
             />
             <TextField
               size="small"
@@ -76,6 +111,8 @@ const StyledLogin = () => {
               name="password"
               label="Password"
               type={showPassword ? "text" : "password"}
+              error={error === "PasswordError" && true}
+              helperText={error === "PasswordError" && resMessage}
               id="password"
               autoComplete="new-password"
               InputProps={{
@@ -97,14 +134,15 @@ const StyledLogin = () => {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
+            <LoadingButton
               type="submit"
               fullWidth
+              loading={loading}
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               Login
-            </Button>
+            </LoadingButton>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="signup" variant="body2">

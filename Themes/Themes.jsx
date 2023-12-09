@@ -1,7 +1,8 @@
-import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
 import { ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { useContext } from "react";
+import { ThemeContext } from "../common/contexts/ThemeModeProvider";
+
 const font = "'Poppins', sans-serif";
 
 const Themes = ({ children }) => {

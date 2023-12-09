@@ -1,6 +1,6 @@
-import Home from '@/common/components/modules/Home/Home';
 import axios from 'axios';
 import Head from 'next/head';
+import Home from '../common/components/modules/Home/Home';
 
 export default function IndexPage({ allServerData }) {
   return (

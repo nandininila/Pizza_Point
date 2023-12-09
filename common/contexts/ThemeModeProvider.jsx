@@ -1,7 +1,5 @@
 import { createContext, useState } from "react";
 
-export const ThemeContext = createContext();
-
 const ThemeModeProvider = ({ children }) => {
   const [themeLight, setThemeType] = useState(true);
   const [allData, setAllData] = useState([]);
@@ -26,5 +24,7 @@ const ThemeModeProvider = ({ children }) => {
     <ThemeContext.Provider value={themeValue}>{children}</ThemeContext.Provider>
   );
 };
+
+export const ThemeContext = createContext();
 
 export default ThemeModeProvider;
