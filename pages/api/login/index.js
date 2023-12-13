@@ -1,5 +1,6 @@
 import { serialize } from "cookie";
 import User from "../../../common/models/User";
+import { textToNumber } from "../../../common/types/utils/convert/textToNumber";
 import generateToken from "../../../common/types/utils/generateToken";
 import dbConnect from "../../../common/types/utils/mongoose";
 
@@ -33,6 +34,7 @@ export default async function handler(req, res) {
       if (user && verifyPassword) {
         try {
           const token = generateToken(user.id);
+          const textToNum = textToNumber(token);
           const cookieOption = {
             httpOnly: true,
             maxAge: 3600 * 24 * 30,
@@ -40,9 +42,9 @@ export default async function handler(req, res) {
             sameSite: "Strict",
             secure: process.env.NODE_ENV === "production",
           }
-          res.status(200).setHeader("Set-Cookie", serialize("authToken", token, cookieOption));
-          return res.status(200).json({ success: "SuccessToken", message: "Set token to header!" });
+          res.status(200).setHeader("Set-Cookie", serialize("authToken", textToNum, cookieOption));
 
+          return res.status(200).json({ success: "SuccessToken", message: "Set token to header!" });
         } catch (error) {
           return res.status(401).send({ error: "errorToken", message: "Failed send token to header" });
         }

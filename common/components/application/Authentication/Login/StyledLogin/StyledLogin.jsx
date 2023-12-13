@@ -53,7 +53,7 @@ const StyledLogin = () => {
       setError("");
       setResMessage("");
       setLoading(false);
-      router.push("/");
+      router.reload();
     } catch (error) {
       setLoading(false);
       const { data } = error?.response;

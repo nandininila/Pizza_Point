@@ -1,5 +1,5 @@
-import Product from "@/common/models/Product";
-import dbConnect from "@/common/types/utils/mongoose";
+import Product from "../../../common/models/Product";
+import dbConnect from "../../../common/types/utils/mongoose";
 
 export default async function handler(req, res) {
     const { method, query: { id } } = req;

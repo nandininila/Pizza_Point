@@ -13,9 +13,11 @@ import {
   useTheme,
 } from "@mui/material";
 import arrayShuffle from "array-shuffle";
+import axios from "axios";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../../../contexts/ThemeModeProvider";
+import { frontendOrigin } from "../../../../types/utils/const";
 
 const Main = styled("div")(({ theme }) => theme.unstable_sx({}));
 
@@ -28,12 +30,12 @@ const Container = styled("div")(({ theme }) =>
   })
 );
 
-const StyledPizzaCards = ({ allServerData }) => {
+const StyledPizzaCards = () => {
   const [addToCart, setAddToCart] = useState(true);
 
   const theme = useTheme();
   const {
-    // allData,
+    allData,
     setAllData,
     allShuffledData,
     setAllShuffledData,
@@ -43,17 +45,15 @@ const StyledPizzaCards = ({ allServerData }) => {
 
   const loadData = async () => {
     try {
-      // const url = "http://localhost:3000/api/products";
-      // const res = await axios.get(url);
-      // const data = res.data;
+      const url = `${frontendOrigin}/api/products`;
+      const { data } = await axios.get(url);
+      setAllData(data);
 
       // condition to load data
-      const categoryWiseData = await allServerData.filter((d) => {
+      const categoryWiseData = await allData.filter((d) => {
         return d.category === selectedCategory;
       });
       // condition to load data
-
-      setAllData(allServerData);
       const shuffled = arrayShuffle(categoryWiseData);
       setAllShuffledData(shuffled);
     } catch (error) {

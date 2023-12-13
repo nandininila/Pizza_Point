@@ -9,10 +9,10 @@ import {
   styled,
 } from "@mui/material";
 
-import { addProduct } from "@/redux/cartSlice";
 import { Add, Remove } from "@mui/icons-material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { addProduct } from "../../../../../redux/cartSlice";
 
 const StyledSingleProduct = ({ singleProduct: product }) => {
   const [checkedState, setCheckedState] = useState(
