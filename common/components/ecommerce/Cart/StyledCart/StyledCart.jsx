@@ -1,10 +1,3 @@
-import { frontendOrigin } from "@/common/types/utils/const";
-import {
-  decreaseQuantity,
-  deleteProduct,
-  increaseQuantity,
-  reset,
-} from "@/redux/cartSlice";
 import { Add, DeleteOutline, Remove } from "@mui/icons-material";
 import {
   Box,
@@ -20,6 +13,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  decreaseQuantity,
+  deleteProduct,
+  increaseQuantity,
+  reset,
+} from "../../../../../redux/cartSlice";
+import { frontendOrigin } from "../../../../types/utils/const";
 import OrderDetail from "../../OrderDetail/OrderDetail";
 
 const StyledCart = () => {
@@ -141,13 +141,16 @@ const StyledCart = () => {
                     Price: <small>$</small>
                     {product?.price}
                   </Typography>
-                  <Typography
-                    gutterBottom
-                    typography={{ xs: "body2", sm: "subtitle2" }}
-                    fontWeight={"bold"}
-                  >
-                    Size: {product?.sizeName}
-                  </Typography>
+
+                  {product?.sizes.length > 0 && (
+                    <Typography
+                      gutterBottom
+                      typography={{ xs: "body2", sm: "subtitle2" }}
+                      fontWeight={"bold"}
+                    >
+                      Size: {product?.sizeName}
+                    </Typography>
+                  )}
 
                   {product?.extras?.length > 0 && (
                     <Typography typography={{ xs: "body2", sm: "subtitle2" }}>

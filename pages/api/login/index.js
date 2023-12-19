@@ -1,6 +1,6 @@
 import { serialize } from "cookie";
 import User from "../../../common/models/User";
-import { textToNumber } from "../../../common/types/utils/convert/textToNumber";
+import { stringToNumber } from "../../../common/types/utils/convert/stringToNumber";
 import generateToken from "../../../common/types/utils/generateToken";
 import dbConnect from "../../../common/types/utils/mongoose";
 
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   await dbConnect();
 
   if (method !== "POST") {
-    return res.status(403).json({ error: "errorMethod", message: "Method not found!" });
+    return res.status(405).json({ error: "errorMethod", message: "Method not found!" });
   }
 
   if (method === "POST") {
@@ -22,31 +22,30 @@ export default async function handler(req, res) {
 
       const user = await User.findOne({ email });
       if (!user) {
-        return res.status(401).json({ error: "EmailError", message: "Invalid Email" });
+        return res.status(404).json({ error: "EmailError", message: "Wrong Email!" });
       }
 
       const verifyPassword = await user.matchPassword(password);
       if (!verifyPassword) {
-        return res.status(401).json({ error: "PasswordError", message: "Wrong Password" });
+        return res.status(401).json({ error: "PasswordError", message: "Wrong Password!" });
       }
 
       // set cookie to header
       if (user && verifyPassword) {
         try {
           const token = generateToken(user.id);
-          const textToNum = textToNumber(token);
+          const encodeJwt = stringToNumber(token);
           const cookieOption = {
-            httpOnly: true,
+            httpOnly: false,
             maxAge: 3600 * 24 * 30,
             path: "/",
             sameSite: "Strict",
             secure: process.env.NODE_ENV === "production",
           }
-          res.status(200).setHeader("Set-Cookie", serialize("authToken", textToNum, cookieOption));
-
-          return res.status(200).json({ success: "SuccessToken", message: "Set token to header!" });
+          res.status(201).setHeader("Set-Cookie", serialize("authToken", encodeJwt, cookieOption));
+          return res.status(200).json({ success: "login", message: "Successfully Login" });
         } catch (error) {
-          return res.status(401).send({ error: "errorToken", message: "Failed send token to header" });
+          return res.status(400).json({ error: "login", message: "Logout failed!" });
         }
       }
 

@@ -25,7 +25,7 @@ import dbConnect from "../../../common/types//utils/mongoose";
 
 
 export default async function handler(req, res) {
-    const { method } = req;
+    const { method, body } = req;
 
     await dbConnect();
 
@@ -34,16 +34,16 @@ export default async function handler(req, res) {
         const products = await Product.find();
             res.status(200).json(products);
         } catch (err) {
-            res.status(500).json(err);
+            return res.status(400).json({ error: "getAllProducts", message: "Failed to get all products!" });
         }
     }
 
     if (method === "POST") {
         try {
-            const product = await Product.create(req.body);
+            const product = await Product.insertMany(body);
             res.status(201).json(product);
         } catch (err) {
-            res.status(500).json(err);
+            return res.status(400).json({ error: "createProduct", message: "Failed to create product!" });
         }
     }
 

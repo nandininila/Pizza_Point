@@ -47,9 +47,7 @@ const StyledLogin = () => {
 
     try {
       const url = `${frontendOrigin}/api/login`;
-      const { data } = await axios.post(url, user);
-
-      console.log(data);
+      await axios.post(url, user);
       setError("");
       setResMessage("");
       setLoading(false);

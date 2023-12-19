@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { BiLogoFacebookCircle, BiLogoInstagramAlt } from "react-icons/bi";
+import Logo from "../../Navbar/StyledNav/Logo/Logo";
 
 // styles
 const Main = styled("div")(({ theme }) => theme.unstable_sx({}));
@@ -35,22 +36,6 @@ const Item = styled("div")(({ theme }) =>
     display: "flex",
     flexDirection: "column",
     alignItems: { xs: "center", tablet: "initial" },
-  })
-);
-
-const Title = styled("div")(({ theme }) =>
-  theme.unstable_sx({
-    display: "flex",
-    alignItems: "center",
-    typography: { xs: "h6", tablet: "h5" },
-
-    "span:first-of-type": {
-      fontWeight: "700",
-    },
-
-    "span:last-of-type": {
-      color: "text.2",
-    },
   })
 );
 
@@ -107,16 +92,7 @@ const StyledFooter = () => {
               gap={3}
             >
               <Grid item>
-                <Title>
-                  <Box width={{ xs: 32, tablet: 40 }} pr={0.5}>
-                    <img
-                      src="https://res.cloudinary.com/united1234/image/upload/v1701943139/pizza-point/logo/pizzaLogo_al3tu4.png"
-                      alt="logo"
-                    />
-                  </Box>
-                  <span>Pizza</span>
-                  <span>Point</span>
-                </Title>
+                <Logo />
               </Grid>
               <Grid item>
                 <FormControl variant="standard" focused sx={{ width: 220 }}>

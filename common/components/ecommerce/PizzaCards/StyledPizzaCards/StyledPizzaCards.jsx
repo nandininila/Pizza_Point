@@ -31,9 +31,8 @@ const Container = styled("div")(({ theme }) =>
 );
 
 const StyledPizzaCards = () => {
-  const [addToCart, setAddToCart] = useState(true);
-
   const theme = useTheme();
+
   const {
     allData,
     setAllData,
@@ -48,18 +47,16 @@ const StyledPizzaCards = () => {
       const url = `${frontendOrigin}/api/products`;
       const { data } = await axios.get(url);
       setAllData(data);
-
-      // condition to load data
-      const categoryWiseData = await allData.filter((d) => {
-        return d.category === selectedCategory;
-      });
-      // condition to load data
-      const shuffled = arrayShuffle(categoryWiseData);
+      const shuffled = arrayShuffle(data);
       setAllShuffledData(shuffled);
     } catch (error) {
       console.error(error);
     }
   };
+
+  const categoryWiseData = allShuffledData.filter((d) => {
+    return d.category === selectedCategory;
+  });
 
   useEffect(() => {
     loadData();
@@ -71,16 +68,21 @@ const StyledPizzaCards = () => {
   }
 
   //
+  const [addToWishlist, setAddToWishlist] = useState([]);
 
-  const handleChange = (event) => {
-    setAddToCart(event.target.checked);
+  const handleCheckboxes = (event, id) => {
+    if (event.target.checked) {
+      setAddToWishlist([...addToWishlist, id]);
+    } else {
+      setAddToWishlist(addToWishlist.filter((filterId) => filterId !== id));
+    }
   };
 
   return (
     <Main>
       <Container>
         <Grid container rowSpacing={2} columnSpacing={{ xs: 1.5, md: 3 }}>
-          {allShuffledData
+          {categoryWiseData
             .slice(0, sliceEndNumber)
             .map(({ _id, name, image, description, price, category }, i) => (
               <Grid item key={i} xs={6} sm={4} md={3}>
@@ -169,12 +171,12 @@ const StyledPizzaCards = () => {
                     </Typography>
 
                     <Checkbox
-                      icon={<FavoriteBorder />}
+                      title="Add to wishlist"
+                      icon={<FavoriteBorder color="warning" />}
                       checkedIcon={<Favorite />}
                       color="error"
-                      checked={addToCart}
-                      onChange={handleChange}
-                      inputProps={{ "aria-label": "controlled" }}
+                      checked={addToWishlist.includes(_id)}
+                      onChange={(e) => handleCheckboxes(e, _id)}
                     />
                   </CardActions>
                 </Card>

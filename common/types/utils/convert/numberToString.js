@@ -1,4 +1,4 @@
-export function numberToText(m) {
+export function numberToString(m) {
     const formateNum = BigInt(m);
     let hexNumber = formateNum.toString(16);
 

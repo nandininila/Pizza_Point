@@ -1,5 +1,5 @@
-export function textToNumber(text) {
-    const asciiStr = encodeURIComponent(text);
+export function stringToNumber(string) {
+    const asciiStr = encodeURIComponent(string);
     const chars = asciiStr.split("");
 
     const hexChars = chars.map((ch) =>
