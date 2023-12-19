@@ -1,7 +1,7 @@
 import StyledPizzaCards from "./StyledPizzaCards/StyledPizzaCards";
 
-const PizzaCards = ({ allServerData }) => {
-  return <StyledPizzaCards allServerData={allServerData} />;
+const PizzaCards = () => {
+  return <StyledPizzaCards />;
 };
 
 export default PizzaCards;

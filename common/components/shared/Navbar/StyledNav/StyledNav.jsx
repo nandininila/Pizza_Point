@@ -1,4 +1,3 @@
-import { frontendOrigin } from "@/common/types/utils/const";
 import {
   Badge,
   Box,
@@ -13,8 +12,6 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import Image from "next/image";
-import logo from "/common/content/logo/pizzaLogo.png";
 
 import ArticleIcon from "@mui/icons-material/Article";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
@@ -26,51 +23,27 @@ import MenuIcon from "@mui/icons-material/Menu";
 import StoreIcon from "@mui/icons-material/Store";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import { useContext, useState } from "react";
+import { FaRegUser } from "react-icons/fa6";
+import { IoMdLogIn } from "react-icons/io";
 
-import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
-import { createFluidValue } from "@/common/hooks/FluidValue/mix/FluidValue";
 import { ShoppingCart } from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-
-const Logo = styled("div")(({ theme }) =>
-  theme.unstable_sx({
-    display: "flex",
-    alignItems: "center",
-    width: { xs: "80%", sm: "40%" },
-
-    "& img": {
-      height: "auto",
-      width: createFluidValue(1.2, 2.3),
-    },
-  })
-);
-
-const Title = styled("div")(({ theme }) =>
-  theme.unstable_sx({
-    fontSize: createFluidValue(1.2, 2),
-    pl: ".2em",
-
-    "span:first-of-type": {
-      fontWeight: "700",
-    },
-
-    "span:last-of-type": {
-      color: "text.2",
-    },
-  })
-);
+import { ThemeContext } from "../../../../contexts/ThemeModeProvider";
+import { frontendOrigin } from "../../../../types/utils/const";
+import AccountMenu from "./AccountMenu/AccountMenu";
+import Logo from "./Logo/Logo";
 
 const NavLinks = [
-  { name: "Home", href: "/" },
+  // { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Menu", href: "/menu" },
   { name: "Offers", href: "/offers" },
   { name: "Store", href: "/store" },
 ];
 
-const data = [
+const NavDrawerData = [
   { name: "Home", icon: <HomeIcon /> },
   { name: "Products", icon: <StoreIcon /> },
   { name: "Menu", icon: <WidgetsIcon /> },
@@ -81,7 +54,7 @@ const data = [
 
 const NavLink = styled("div")(({ theme }) =>
   theme.unstable_sx({
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("tablet")]: {
       display: "none",
     },
 
@@ -89,7 +62,7 @@ const NavLink = styled("div")(({ theme }) =>
 
     "& a": {
       p: "0 .5em",
-      fontSize: createFluidValue(0.65, 0.85),
+      typography: "subtitle2",
       fontWeight: "300",
       color: "inherit",
 
@@ -107,44 +80,6 @@ const NavDrawer = styled("div")(({ theme }) =>
   })
 );
 
-const NavDrawerLogo = styled("div")(({ theme }) =>
-  theme.unstable_sx({
-    display: "flex",
-    py: "1em",
-    justifyContent: "center",
-    userSelect: "none",
-  })
-);
-
-const MenuButton = styled("div")(({ theme }) =>
-  theme.unstable_sx({
-    "& button": {
-      bgcolor: "bg.2",
-      ml: ".2rem",
-      fontSize: createFluidValue(0.8, 1.5),
-
-      "&:hover": {
-        backgroundColor: "bg.2",
-      },
-
-      "& svg": {
-        color: "white",
-      },
-    },
-  })
-);
-
-const Cart = styled("div")(({ theme }) =>
-  theme.unstable_sx({
-    "& button": {
-      fontSize: createFluidValue(1, 1.4),
-      "& svg": {
-        strokeWidth: ".5em",
-      },
-    },
-  })
-);
-
 const Main = styled("div")(({ theme }) => theme.unstable_sx({}));
 
 const Container = styled("div")(({ theme }) =>
@@ -156,11 +91,13 @@ const Container = styled("div")(({ theme }) =>
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    height: createFluidValue(3, 5),
+    height: "4.5rem",
   })
 );
 
 const StyledNav = () => {
+  // redux
+  const isAuthenticated = useSelector((state) => state?.auth?.isAuthenticated);
   const quantity = useSelector((state) => state.cart.quantity);
 
   const { themeLight, setThemeType } = useContext(ThemeContext);
@@ -185,22 +122,20 @@ const StyledNav = () => {
   return (
     <Main>
       <Container>
-        <Logo>
-          <Image src={logo} alt="Logo" />
-          <Title>
-            <span>Pizza</span>
-            <span>Point</span>
-          </Title>
-        </Logo>
+        <Box width={{ xs: "70%", tablet: "40%" }}>
+          <Logo />
+        </Box>
 
         {NavLinks.map((link, i) => (
           <NavLink
             key={i}
             sx={{
-              borderBottom: currentRoute(i, link.href)
-                ? ".13em solid #db2527"
-                : 0,
-              // transform: currentRoute(i, link.href) ? "scale(1.1)" : "initial",
+              textDecoration: currentRoute(i, link.href) ? "underline" : "none",
+              textDecorationColor: currentRoute(i, link.href)
+                ? "#db2527"
+                : "initial",
+              textDecorationThickness: "0.1rem",
+              textUnderlineOffset: ".5rem",
             }}
           >
             <Typography
@@ -208,7 +143,7 @@ const StyledNav = () => {
               href={link?.href}
               style={{
                 color: currentRoute(i, link.href) ? "#db2527" : null,
-                fontWeight: currentRoute(i, link.href) ? "600" : null,
+                fontWeight: currentRoute(i, link.href) ? "500" : null,
               }}
             >
               {link?.name}
@@ -216,18 +151,95 @@ const StyledNav = () => {
           </NavLink>
         ))}
 
+        <Tooltip title="Cart">
+          <Link href="/cart" passHref>
+            <IconButton>
+              <Badge badgeContent={quantity} color="warning">
+                <ShoppingCart />
+              </Badge>
+            </IconButton>
+          </Link>
+        </Tooltip>
+
+        <Tooltip title={themeLight ? "Dark Mode" : "Light Mode"}>
+          <IconButton onClick={handleThemeToggle}>
+            {themeLight ? <DarkModeIcon /> : <LightModeIcon />}
+          </IconButton>
+        </Tooltip>
+
+        {!isAuthenticated ? (
+          <>
+            <Tooltip title="Login">
+              <Link href={"/login"}>
+                <IconButton
+                  size="small"
+                  sx={{
+                    ml: ".3rem",
+                    color: "white",
+                    bgcolor: themeLight ? "warning.main" : "warning.dark",
+                    ":hover": { color: "white", bgcolor: "warning.dark" },
+                  }}
+                >
+                  <IoMdLogIn />
+                </IconButton>
+              </Link>
+            </Tooltip>
+
+            <Tooltip title="Signup">
+              <Link href={"/signup"}>
+                <IconButton
+                  size="small"
+                  sx={{
+                    ml: ".8rem",
+                    color: "white",
+                    bgcolor: "success.main",
+                    ":hover": { color: "white", bgcolor: "success.main" },
+                  }}
+                >
+                  <FaRegUser />
+                </IconButton>
+              </Link>
+            </Tooltip>
+          </>
+        ) : (
+          // <Tooltip title="Logout">
+          //   <IconButton
+          //     onClick={handleLogout}
+          //     size="small"
+          //     sx={{
+          //       ml: ".3rem",
+          //       color: "white",
+          //       bgcolor: "primary.main",
+          //       ":hover": { color: "white", bgcolor: "primary.main" },
+          //     }}
+          //   >
+          //     <MdLogout />
+          //   </IconButton>
+          // </Tooltip>
+          <AccountMenu />
+        )}
+
+        <IconButton
+          sx={{
+            ml: ".6rem",
+            display: { xs: "flex", tablet: "none" },
+            color: "white",
+            bgcolor: "bg.2",
+            ":hover": { color: "white", bgcolor: "bg.2" },
+          }}
+          size="small"
+          onClick={() => setOpen(true)}
+        >
+          <MenuIcon fontSize="inherit" />
+        </IconButton>
+
+        {/* drawer */}
         <Drawer open={open} anchor={"left"} onClose={() => setOpen(false)}>
           <NavDrawer onClick={() => setOpen(false)}>
-            <NavDrawerLogo>
-              <Image src={logo} height={"32"} width={"32"} alt="Logo" />
-              <Title>
-                <span>Pizza</span>
-                <span>Point</span>
-              </Title>
-            </NavDrawerLogo>
-
+            <Box height={"4.5rem"} display={"flex"} justifyContent={"center"}>
+              <Logo />
+            </Box>
             <Divider />
-
             <Box
               sx={{
                 display: "flex",
@@ -236,7 +248,7 @@ const StyledNav = () => {
               }}
             >
               <List>
-                {data.map((item, index) => (
+                {NavDrawerData.map((item, index) => (
                   <ListItemButton key={index}>
                     <ListItemIcon>{item.icon}</ListItemIcon>
                     <ListItemText primary={item.name} />
@@ -246,28 +258,6 @@ const StyledNav = () => {
             </Box>
           </NavDrawer>
         </Drawer>
-
-        <Cart>
-          <Link href="/cart" passHref>
-            <IconButton>
-              <Badge badgeContent={quantity} color="warning">
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
-          </Link>
-        </Cart>
-
-        <Tooltip title={themeLight ? "Dark Mode" : "Light Mode"}>
-          <IconButton onClick={handleThemeToggle}>
-            {themeLight ? <DarkModeIcon /> : <LightModeIcon />}
-          </IconButton>
-        </Tooltip>
-
-        <MenuButton>
-          <IconButton size="small" onClick={() => setOpen(true)}>
-            <MenuIcon fontSize="inherit" />
-          </IconButton>
-        </MenuButton>
       </Container>
     </Main>
   );

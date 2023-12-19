@@ -1,7 +1,8 @@
-import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
 import { ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { useContext } from "react";
+import { ThemeContext } from "../common/contexts/ThemeModeProvider";
+
 const font = "'Poppins', sans-serif";
 
 const Themes = ({ children }) => {
@@ -70,7 +71,7 @@ const Themes = ({ children }) => {
       // },
 
       text: {
-        1: "#272d2e",
+        1: "#000000DE", // "#272d2e",
         2: "#db2527",
       },
 

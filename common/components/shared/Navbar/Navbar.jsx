@@ -5,9 +5,9 @@ const Navbar = () => {
   const router = useRouter();
   const route = router?.route;
   return (
-    <div style={{ display: route === "/" ? "none" : "initial" }}>
-      <StyledNav />
-    </div>
+    // <div style={{ display: route === "/" ? "none" : "initial" }}>
+    <StyledNav />
+    // </div>
   );
 };
 

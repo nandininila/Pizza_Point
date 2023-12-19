@@ -7,7 +7,7 @@ import Testimonial from "../../application/Testimonial/Testimonial";
 import PizzaCards from "../../ecommerce/PizzaCards/PizzaCards";
 import styles from "./Home.module.css";
 
-const Home = ({ allServerData }) => {
+const Home = () => {
   // const theme = useTheme();
   // let mode = theme.palette.mode;
 
@@ -15,7 +15,7 @@ const Home = ({ allServerData }) => {
     <main className={styles}>
       {/* <Carousel /> */}
       <OurMenu />
-      <PizzaCards allServerData={allServerData} />
+      <PizzaCards />
       <About />
       <Testimonial />
       <Chefs />

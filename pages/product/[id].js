@@ -1,5 +1,6 @@
-import SingleProduct from "@/common/components/ecommerce/SingleProduct/SingleProduct";
 import axios from "axios";
+import SingleProduct from "../../common/components/ecommerce/SingleProduct/SingleProduct";
+import { frontendOrigin } from "../../common/types/utils/const";
 
 const product = ({ singleProduct }) => {
     return (
@@ -10,7 +11,7 @@ const product = ({ singleProduct }) => {
 
 export const getServerSideProps = async ({ params }) => {
     
-    const url = `http://localhost:3000/api/products/${params.id}`;
+    const url = `${frontendOrigin}/api/products/${params.id}`;
     const res = await axios.get(url);
     const data = res.data;
 

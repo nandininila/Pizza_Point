@@ -9,10 +9,10 @@ import {
   styled,
 } from "@mui/material";
 
-import { addProduct } from "@/redux/cartSlice";
 import { Add, Remove } from "@mui/icons-material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { addProduct } from "../../../../../redux/cartSlice";
 
 const StyledSingleProduct = ({ singleProduct: product }) => {
   const [checkedState, setCheckedState] = useState(
@@ -143,14 +143,16 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
               {price}
             </Typography>
 
-            <Typography
-              color="text.secondary"
-              fontSize={{ xs: "0.8rem" }}
-              fontWeight="500"
-              gutterBottom
-            >
-              Size
-            </Typography>
+            {product?.sizes.length > 0 && (
+              <Typography
+                color="text.secondary"
+                fontSize={{ xs: "0.8rem" }}
+                fontWeight="500"
+                gutterBottom
+              >
+                Size
+              </Typography>
+            )}
 
             {product?.sizes?.map((size, i) => (
               <Chip
@@ -172,7 +174,7 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
               />
             ))}
 
-            {product?.extras && (
+            {product?.extras.length > 0 && (
               <Typography
                 color="text.secondary"
                 fontSize={{ xs: "0.8rem" }}
@@ -217,7 +219,6 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
                 onChange={(e) => handleExtras(e, option, index)}
               />
             ))}
-
             <Typography
               color="text.secondary"
               fontSize={{ xs: "0.8rem" }}
@@ -227,7 +228,6 @@ const StyledSingleProduct = ({ singleProduct: product }) => {
             >
               Quantity
             </Typography>
-
             <Stack direction="row" spacing={2}>
               <ButtonGroup
                 size="small"

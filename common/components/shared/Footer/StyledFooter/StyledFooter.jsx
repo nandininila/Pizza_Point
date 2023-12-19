@@ -1,4 +1,3 @@
-import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
 import { East } from "@mui/icons-material";
 import {
   Box,
@@ -16,12 +15,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import Image from "next/image";
 import Link from "next/link";
-import { useContext } from "react";
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { BiLogoFacebookCircle, BiLogoInstagramAlt } from "react-icons/bi";
-import logo from "/common/content/logo/pizzaLogo.png";
+import Logo from "../../Navbar/StyledNav/Logo/Logo";
 
 // styles
 const Main = styled("div")(({ theme }) => theme.unstable_sx({}));
@@ -42,34 +39,11 @@ const Item = styled("div")(({ theme }) =>
   })
 );
 
-const Title = styled("div")(({ theme }) =>
-  theme.unstable_sx({
-    display: "flex",
-    alignItems: "center",
-    typography: { xs: "h6", tablet: "h5" },
-
-    "span:first-of-type": {
-      fontWeight: "700",
-    },
-
-    "span:last-of-type": {
-      color: "text.2",
-    },
-  })
-);
-
 const StyledFooter = () => {
-  const { allData, selectedCategory, setSelectedCategory } =
-    useContext(ThemeContext);
-
-  const categories = allData.map((x) => x.category);
-  const uniqueCategories = [...new Set(categories)];
-  const items = uniqueCategories.map((c) => c);
-
   const footerData = [
     {
       title: "Menu",
-      items: items,
+      items: ["Pizza"],
     },
     {
       title: "Restaurant",
@@ -118,13 +92,7 @@ const StyledFooter = () => {
               gap={3}
             >
               <Grid item>
-                <Title>
-                  <Box width={{ xs: 32, tablet: 40 }} pr={0.5}>
-                    <Image src={logo} alt="logo" />
-                  </Box>
-                  <span>Pizza</span>
-                  <span>Point</span>
-                </Title>
+                <Logo />
               </Grid>
               <Grid item>
                 <FormControl variant="standard" focused sx={{ width: 220 }}>

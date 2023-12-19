@@ -1,4 +1,3 @@
-import { ThemeContext } from "@/common/contexts/ThemeModeProvider";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import {
   Card,
@@ -14,8 +13,11 @@ import {
   useTheme,
 } from "@mui/material";
 import arrayShuffle from "array-shuffle";
+import axios from "axios";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../../../../contexts/ThemeModeProvider";
+import { frontendOrigin } from "../../../../types/utils/const";
 
 const Main = styled("div")(({ theme }) => theme.unstable_sx({}));
 
@@ -28,12 +30,11 @@ const Container = styled("div")(({ theme }) =>
   })
 );
 
-const StyledPizzaCards = ({ allServerData }) => {
-  const [addToCart, setAddToCart] = useState(true);
-
+const StyledPizzaCards = () => {
   const theme = useTheme();
+
   const {
-    // allData,
+    allData,
     setAllData,
     allShuffledData,
     setAllShuffledData,
@@ -43,23 +44,19 @@ const StyledPizzaCards = ({ allServerData }) => {
 
   const loadData = async () => {
     try {
-      // const url = "http://localhost:3000/api/products";
-      // const res = await axios.get(url);
-      // const data = res.data;
-
-      // condition to load data
-      const categoryWiseData = await allServerData.filter((d) => {
-        return d.category === selectedCategory;
-      });
-      // condition to load data
-
-      setAllData(allServerData);
-      const shuffled = arrayShuffle(categoryWiseData);
+      const url = `${frontendOrigin}/api/products`;
+      const { data } = await axios.get(url);
+      setAllData(data);
+      const shuffled = arrayShuffle(data);
       setAllShuffledData(shuffled);
     } catch (error) {
       console.error(error);
     }
   };
+
+  const categoryWiseData = allShuffledData.filter((d) => {
+    return d.category === selectedCategory;
+  });
 
   useEffect(() => {
     loadData();
@@ -71,16 +68,21 @@ const StyledPizzaCards = ({ allServerData }) => {
   }
 
   //
+  const [addToWishlist, setAddToWishlist] = useState([]);
 
-  const handleChange = (event) => {
-    setAddToCart(event.target.checked);
+  const handleCheckboxes = (event, id) => {
+    if (event.target.checked) {
+      setAddToWishlist([...addToWishlist, id]);
+    } else {
+      setAddToWishlist(addToWishlist.filter((filterId) => filterId !== id));
+    }
   };
 
   return (
     <Main>
       <Container>
         <Grid container rowSpacing={2} columnSpacing={{ xs: 1.5, md: 3 }}>
-          {allShuffledData
+          {categoryWiseData
             .slice(0, sliceEndNumber)
             .map(({ _id, name, image, description, price, category }, i) => (
               <Grid item key={i} xs={6} sm={4} md={3}>
@@ -169,12 +171,12 @@ const StyledPizzaCards = ({ allServerData }) => {
                     </Typography>
 
                     <Checkbox
-                      icon={<FavoriteBorder />}
+                      title="Add to wishlist"
+                      icon={<FavoriteBorder color="warning" />}
                       checkedIcon={<Favorite />}
                       color="error"
-                      checked={addToCart}
-                      onChange={handleChange}
-                      inputProps={{ "aria-label": "controlled" }}
+                      checked={addToWishlist.includes(_id)}
+                      onChange={(e) => handleCheckboxes(e, _id)}
                     />
                   </CardActions>
                 </Card>

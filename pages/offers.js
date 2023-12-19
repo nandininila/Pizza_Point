@@ -1,4 +1,3 @@
-
 const OffersRoute = () => {
   return (
     <div>OffersRoute</div>
